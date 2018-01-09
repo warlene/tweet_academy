@@ -2,7 +2,7 @@
 class Bdd{
 
 	const HOST = "localhost";
-	const DBNAME = "registration";
+	const DBNAME = "tweet_academie";
 	const NAME ="root";
 	const PSW ="";
 

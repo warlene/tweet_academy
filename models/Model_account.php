@@ -23,8 +23,11 @@ class Account {
     return true;
   }
 
-  public function add_to_bdd(){
+  public function add_to_bdd($fullname,$displayname,$mail,$password){
+  	include "models/Model.php";
+  	$bdd = Bdd :: bdd_connect();
+  	$bdd -> prepare (INSERT INTO user ())
     
   }
-}
+} 
 ?>
