@@ -15,15 +15,17 @@ class Account {
     if(filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL) == false){
       $error[] = "L'adresse mail est invalide.";
     }
-
     if(!empty($error)){
-      return $error;
+      foreach ($error as $value) {
+        echo '<p>' . $value . '</p>';
+      }
+      return false;
     }
-    else{
+    else {
       return true;
     }
   }
- 
+
   public function add_to_bdd($fullname, $displayname, $mail, $password){
     $bdd = Model::bdd_connect();
     $req = $bdd->prepare("INSERT INTO user SET
@@ -40,5 +42,5 @@ class Account {
     $hash_password = hash('ripemd160', $password . $this->salt);
     return $hash_password;
   }
-} 
+}
 ?>

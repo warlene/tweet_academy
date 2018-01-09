@@ -13,10 +13,7 @@
 
       include 'views/Account/Subscribe_ok.php';
     }
-    if(is_array($check_value)){
-      foreach ($check_value as $value) {
-        echo '<p>' . $value . '</p>';
-      }
+    if($check_value == false){
       include 'views/Account/Subscribe_form.php';
     }
   }
