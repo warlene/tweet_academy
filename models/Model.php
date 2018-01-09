@@ -1,5 +1,5 @@
 <?php
-class Bdd{
+class Model{
 
 	const HOST = "localhost";
 	const DBNAME = "tweet_academie";
@@ -18,5 +18,16 @@ class Bdd{
 		return self::$instance;
 	}
 
+  public static function clean_data($data){
+    $clean_data = trim($data);
+    return $clean_data;
+  }
+
+  public static function clean_displayname($data){
+    $clean_data = Model::clean_data($data);
+    $temp = explode(' ', $clean_data);
+    $displayname = "@" . implode($temp);
+    return $displayname;
+  }
 }
 ?>
