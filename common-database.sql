@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  Dim 07 jan. 2018 à 15:48
+-- Généré le :  lun. 08 jan. 2018 à 17:47
 -- Version du serveur :  5.7.19
--- Version de PHP :  7.0.23
+-- Version de PHP :  5.6.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `commont-database`
+-- Base de données :  `my_twitter`
 --
 
 -- --------------------------------------------------------
@@ -34,13 +34,14 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `idUser` int(11) NOT NULL,
   `idTweet` int(11) NOT NULL,
   `commentContent` varchar(240) DEFAULT NULL,
-  `commentImg` varchar(255) DEFAULT NULL,
+  `idImgUrl` int(11) DEFAULT NULL,
   `commentCreationDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `deleted` varchar(5) NOT NULL DEFAULT 'true',
   PRIMARY KEY (`idComment`),
   KEY `idUser` (`idUser`),
-  KEY `idTweet` (`idTweet`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  KEY `idTweet` (`idTweet`),
+  KEY `idUrl` (`idImgUrl`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -53,9 +54,10 @@ CREATE TABLE IF NOT EXISTS `follow` (
   `idFollowed` int(11) NOT NULL,
   `idFollower` int(11) NOT NULL,
   `dateUpdateStatus` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `followStatus` varchar(5) NOT NULL DEFAULT 'true',  
-  KEY `idUser` (`idFollowed`,`idFollower`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+  `followStatus` varchar(5) NOT NULL DEFAULT 'true',
+  KEY `idUser` (`idFollowed`,`idFollower`),
+  KEY `idFollower` (`idFollower`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -73,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `likes` (
   PRIMARY KEY (`idLike`),
   KEY `idUser` (`idUser`),
   KEY `idTweet` (`idTweet`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -87,12 +89,15 @@ CREATE TABLE IF NOT EXISTS `message` (
   `idSender` int(11) NOT NULL,
   `idReceiver` int(11) NOT NULL,
   `msgContent` varchar(20000) DEFAULT NULL,
-  `msgImg` varchar(255) DEFAULT NULL,
+  `idImgUrl` int(11) DEFAULT NULL,
   `msgCreationDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `deleted` varchar(5) NOT NULL DEFAULT 'true',
+  `deletedSender` varchar(5) NOT NULL DEFAULT 'true',
+  `deletedReceiver` varchar(5) NOT NULL DEFAULT 'true',
   PRIMARY KEY (`idMsg`),
-  KEY `idUser` (`idSender`,`idReceiver`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  KEY `idUser` (`idSender`,`idReceiver`),
+  KEY `idReceiver` (`idReceiver`),
+  KEY `msgImg` (`idImgUrl`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -108,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `tag` (
   `tagCreationDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`idTag`),
   KEY `idTweet` (`idTweet`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -121,14 +126,30 @@ CREATE TABLE IF NOT EXISTS `tweet` (
   `idTweet` int(11) NOT NULL AUTO_INCREMENT,
   `idUser` int(11) NOT NULL,
   `tweetContent` varchar(240) DEFAULT NULL,
-  `tweetImg` varchar(255) DEFAULT NULL,
+  `idImgUrl` int(11) DEFAULT NULL,
   `idReTweet` int(11) DEFAULT NULL,
   `idReTweetFrom` int(11) DEFAULT NULL,
   `tweetDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `deleted` varchar(5) NOT NULL DEFAULT 'true',
   PRIMARY KEY (`idTweet`),
-  KEY `idUser` (`idUser`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  KEY `idUser` (`idUser`),
+  KEY `tweetImg` (`idImgUrl`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `url`
+--
+
+DROP TABLE IF EXISTS `url`;
+CREATE TABLE IF NOT EXISTS `url` (
+  `idUrl` int(11) NOT NULL AUTO_INCREMENT,
+  `LongUrl` varchar(255) NOT NULL,
+  `ShortUrl` varchar(20) NOT NULL,
+  PRIMARY KEY (`idUrl`),
+  KEY `ShortUrl` (`ShortUrl`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -143,12 +164,66 @@ CREATE TABLE IF NOT EXISTS `user` (
   `displayName` varchar(40) CHARACTER SET utf8 NOT NULL,
   `mail` varchar(254) CHARACTER SET utf8 NOT NULL,
   `password` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `avatar` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `idUrlAvatar` int(11) DEFAULT NULL,
   `theme` varchar(20) CHARACTER SET utf8 DEFAULT NULL,
   `registrationDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `userStatus` varchar(5) NOT NULL DEFAULT 'true',
-  PRIMARY KEY (`idUser`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+  PRIMARY KEY (`idUser`),
+  KEY `idUrlAvatar` (`idUrlAvatar`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `comment`
+--
+ALTER TABLE `comment`
+  ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`idTweet`) REFERENCES `tweet` (`idTweet`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `comment_ibfk_3` FOREIGN KEY (`idImgUrl`) REFERENCES `url` (`idUrl`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `follow`
+--
+ALTER TABLE `follow`
+  ADD CONSTRAINT `follow_ibfk_1` FOREIGN KEY (`idFollowed`) REFERENCES `user` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `follow_ibfk_2` FOREIGN KEY (`idFollower`) REFERENCES `user` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `likes`
+--
+ALTER TABLE `likes`
+  ADD CONSTRAINT `likes_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `likes_ibfk_2` FOREIGN KEY (`idTweet`) REFERENCES `tweet` (`idTweet`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `message`
+--
+ALTER TABLE `message`
+  ADD CONSTRAINT `message_ibfk_1` FOREIGN KEY (`idReceiver`) REFERENCES `user` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `message_ibfk_2` FOREIGN KEY (`idSender`) REFERENCES `user` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `message_ibfk_3` FOREIGN KEY (`idImgUrl`) REFERENCES `url` (`idUrl`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `tag`
+--
+ALTER TABLE `tag`
+  ADD CONSTRAINT `tag_ibfk_1` FOREIGN KEY (`idTweet`) REFERENCES `tweet` (`idTweet`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `tweet`
+--
+ALTER TABLE `tweet`
+  ADD CONSTRAINT `tweet_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tweet_ibfk_2` FOREIGN KEY (`idImgUrl`) REFERENCES `url` (`idUrl`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `user`
+--
+ALTER TABLE `user`
+  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`idUrlAvatar`) REFERENCES `url` (`idUrl`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
