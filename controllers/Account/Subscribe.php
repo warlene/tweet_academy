@@ -1,9 +1,11 @@
 <?php
   include 'views/Account/Subscribe_form.php';
 
-  if(isset($_POST)){
+  if(!empty($_POST)){
     include 'models/Model_account.php';
     $form = new Account;
-    $form->check_form_values();
+    if($form->check_form_values() == true){
+      $form->add_to_bdd();
+    }
   }
 ?>
