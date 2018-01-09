@@ -27,12 +27,13 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Logo</a>
+      <img src="images/factory.png" height="60" width="60">
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">Messages</a></li>
+        <li class="active"><a href="rooter.php">Tweet Academie</a></li>
+        <li><a href="rooter.php?controller=account&action=subscribe">Inscription</a></li>
+        <li><a href="rooter.php?controller=account&action=connexion">Connexion</a></li>
       </ul>
     </div>
   </div>
