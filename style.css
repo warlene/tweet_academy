@@ -1,6 +1,27 @@
+@font-face {
+  font-family: 'Loguetown';
+  src:url('font/Loguetown Demo.ttf');
+}
+@font-face {
+  font-family: 'Kenyan coffee';
+  src:url('font/kenyan coffee rg.ttf');
+}
 .container.text-center .btn-secondary {
   background-color: #E0ECF8;
 }
-/* .container {
-  width: 700px;
-} */
+.cover {
+  float:none;
+}
+.navbar a {
+  margin-top: .5em;
+  margin-bottom: .5em;
+  font-family: 'Loguetown';
+  font-size: 2em;
+  text-decoration-color: red;
+}
+li.active {
+  background-color: black;
+}
+body{
+  font-family: 'Kenyan coffee';
+}
