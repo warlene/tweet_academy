@@ -1,4 +1,5 @@
 <?php
+  session_start();
   include 'views/layout/Nav.php';
 
   $controller = isset($_GET['controller'])? dirname(__FILE__).'/controllers/' . $_GET["controller"] : dirname(__FILE__).'/controllers/';

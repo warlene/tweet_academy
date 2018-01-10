@@ -1,5 +1,4 @@
 <div class="container text-center">
-  
   <form method="POST">
   <div class="col-md-4 offset-5">
     <h2>Formulaire d'inscription</h2>
