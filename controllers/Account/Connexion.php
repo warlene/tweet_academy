@@ -6,11 +6,15 @@ if(!empty($_POST)){
   $password = $form->hash_password($_POST['password']);
   $check = $form->user_exists($_POST['identity'], $password);
   if($check == null){
-    echo '<p>La connexion a échouée. Veuiller réessayer et vérifier vos données.</p>';
+    echo '<p>La connexion a échoué. Veuillez vérifier vos données et réessayer.</p>';
     include 'views/Account/Connexion_form.php';
   }
   if(is_int(intval($check))){
     $user_infos = $form->read_user_info($check);
+    if($user_infos == false){
+      echo '<p>Erreur lors de la connexion. Essayez plus tard.</p>';
+      include 'views/Account/Connexion_form.php';
+    }
     $_SESSION['idUser'] = $check;
   	$_SESSION['fullName'] = $user_infos['fullName'];
   	$_SESSION['displayName'] = $user_infos['displayName'];

@@ -9,8 +9,10 @@
       $displayname = Model::clean_displayname($_POST['displayname']);
       $mail = $_POST['mail'];
       $password = $form->hash_password($_POST['password']);
-      $form->add_to_bdd($fullname, $displayname, $mail, $password);
-
+      $addBdd = $form->add_to_bdd($fullname, $displayname, $mail, $password);
+      if(!is_int(intval($addBdd)){
+        e
+      }
       include 'views/Account/Subscribe_ok.php';
     }
     if($check_value == false){
