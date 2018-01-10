@@ -16,9 +16,11 @@ class Account {
       $error[] = "L'adresse mail est invalide.";
     }
     if(!empty($error)){
-      foreach ($error as $value) {
-        echo '<p>' . $value . '</p>';
+      echo '<ul>'."\n";
+      foreach($error as $e) {
+        echo '	<li>'.$e.'</li>'."\n";
       }
+      echo '</ul>';
       return false;
     }
     else {

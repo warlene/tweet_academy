@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Tweet Academie</title>
+  <title>Tweet Factory</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -27,13 +27,13 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <img src="images/factory.png" height="60" width="60">
+      <img src="images/factory.png" height="70" width="70">
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="rooter.php">Tweet Factory</a></li>
-        <li><a href="rooter.php?controller=account&action=subscribe">Inscription</a></li>
-        <li><a href="rooter.php?controller=account&action=connexion">Connexion</a></li>
+        <li class="<?php if(empty($_GET)){ ?>active<?php }?>"><a href="rooter.php">Tweet Factory</a></li>
+        <li class="<?php if(isset($_GET['action']) && $_GET['action']=='subscribe'){ ?>active<?php } ?>"><a href="rooter.php?controller=account&action=subscribe">Inscription</a></li>
+        <li class="<?php if(isset($_GET['action']) && $_GET['action']=='connexion'){ ?>active<?php } ?>"><a href="rooter.php?controller=account&action=connexion">Connexion</a></li>
       </ul>
     </div>
   </div>
