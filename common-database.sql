@@ -34,13 +34,12 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `idUser` int(11) NOT NULL,
   `idTweet` int(11) NOT NULL,
   `commentContent` varchar(240) DEFAULT NULL,
-  `idImgUrl` int(11) DEFAULT NULL,
+  `imgUrl` varchar(255) DEFAULT NULL,
   `commentCreationDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `deleted` varchar(5) NOT NULL DEFAULT 'true',
   PRIMARY KEY (`idComment`),
   KEY `idUser` (`idUser`),
-  KEY `idTweet` (`idTweet`),
-  KEY `idUrl` (`idImgUrl`)
+  KEY `idTweet` (`idTweet`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -89,14 +88,13 @@ CREATE TABLE IF NOT EXISTS `message` (
   `idSender` int(11) NOT NULL,
   `idReceiver` int(11) NOT NULL,
   `msgContent` varchar(20000) DEFAULT NULL,
-  `idImgUrl` int(11) DEFAULT NULL,
+  `imgUrl` varchar(255) DEFAULT NULL,
   `msgCreationDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `deletedSender` varchar(5) NOT NULL DEFAULT 'true',
   `deletedReceiver` varchar(5) NOT NULL DEFAULT 'true',
   PRIMARY KEY (`idMsg`),
   KEY `idUser` (`idSender`,`idReceiver`),
-  KEY `idReceiver` (`idReceiver`),
-  KEY `msgImg` (`idImgUrl`)
+  KEY `idReceiver` (`idReceiver`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -126,14 +124,13 @@ CREATE TABLE IF NOT EXISTS `tweet` (
   `idTweet` int(11) NOT NULL AUTO_INCREMENT,
   `idUser` int(11) NOT NULL,
   `tweetContent` varchar(240) DEFAULT NULL,
-  `idImgUrl` int(11) DEFAULT NULL,
+  `imgUrl` varchar(255) DEFAULT NULL,
   `idReTweet` int(11) DEFAULT NULL,
   `idReTweetFrom` int(11) DEFAULT NULL,
   `tweetDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `deleted` varchar(5) NOT NULL DEFAULT 'true',
   PRIMARY KEY (`idTweet`),
-  KEY `idUser` (`idUser`),
-  KEY `tweetImg` (`idImgUrl`)
+  KEY `idUser` (`idUser`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -145,10 +142,10 @@ CREATE TABLE IF NOT EXISTS `tweet` (
 DROP TABLE IF EXISTS `url`;
 CREATE TABLE IF NOT EXISTS `url` (
   `idUrl` int(11) NOT NULL AUTO_INCREMENT,
-  `LongUrl` varchar(255) NOT NULL,
-  `ShortUrl` varchar(20) NOT NULL,
+  `longUrl` varchar(255) NOT NULL,
+  `shortUrl` varchar(20) NOT NULL,
   PRIMARY KEY (`idUrl`),
-  KEY `ShortUrl` (`ShortUrl`)
+  KEY `shortUrl` (`shortUrl`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -181,8 +178,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 ALTER TABLE `comment`
   ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`idTweet`) REFERENCES `tweet` (`idTweet`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `comment_ibfk_3` FOREIGN KEY (`idImgUrl`) REFERENCES `url` (`idUrl`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`idTweet`) REFERENCES `tweet` (`idTweet`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `follow`
@@ -203,8 +199,7 @@ ALTER TABLE `likes`
 --
 ALTER TABLE `message`
   ADD CONSTRAINT `message_ibfk_1` FOREIGN KEY (`idReceiver`) REFERENCES `user` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `message_ibfk_2` FOREIGN KEY (`idSender`) REFERENCES `user` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `message_ibfk_3` FOREIGN KEY (`idImgUrl`) REFERENCES `url` (`idUrl`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `message_ibfk_2` FOREIGN KEY (`idSender`) REFERENCES `user` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `tag`
@@ -216,8 +211,7 @@ ALTER TABLE `tag`
 -- Contraintes pour la table `tweet`
 --
 ALTER TABLE `tweet`
-  ADD CONSTRAINT `tweet_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tweet_ibfk_2` FOREIGN KEY (`idImgUrl`) REFERENCES `url` (`idUrl`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `tweet_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `user`
