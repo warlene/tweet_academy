@@ -19,6 +19,10 @@
   font-size: 2em;
   text-decoration-color: red;
 }
+
+a.active {
+	background-color: red;
+}
 li.active {
   background-color: black;
 }
