@@ -15,14 +15,16 @@ if(!empty($_POST)){
       echo '<p>Erreur lors de la connexion. Essayez plus tard.</p>';
       include 'views/Account/Connexion_form.php';
     }
-    $_SESSION['idUser'] = $check;
-  	$_SESSION['fullName'] = $user_infos['fullName'];
-  	$_SESSION['displayName'] = $user_infos['displayName'];
-  	$_SESSION['mail']  = $user_infos['mail'];
-    $_SESSION['idUrlAvatar']  = $user_infos['idUrlAvatar'];
-    $_SESSION['theme']  = $user_infos['theme'];
-    $_SESSION['userStatus'] = $user_infos['userStatus'];
-    include 'views/Account/Connexion_ok.php';
+    else{
+      $_SESSION['idUser'] = $check;
+  	  $_SESSION['fullName'] = $user_infos['fullName'];
+  	  $_SESSION['displayName'] = $user_infos['displayName'];
+  	  $_SESSION['mail']  = $user_infos['mail'];
+      $_SESSION['idUrlAvatar']  = $user_infos['idUrlAvatar'];
+      $_SESSION['theme']  = $user_infos['theme'];
+      $_SESSION['userStatus'] = $user_infos['userStatus'];
+      include 'views/Account/Connexion_ok.php';
+    }
   }
 }
 else{
