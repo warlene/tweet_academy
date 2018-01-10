@@ -6,22 +6,39 @@
   font-family: 'Kenyan coffee';
   src:url('font/kenyan coffee rg.ttf');
 }
+@font-face {
+  font-family: 'fontastique';
+  src:url('font/fontastique.ttf');
+}
 .container.text-center .btn-secondary {
   background-color: #E0ECF8;
 }
-.cover {
-  float:none;
+.container.text-center {
+
 }
-.navbar a {
+.cover {
+  
+}
+.navbar-nav a {
   margin-top: .5em;
   margin-bottom: .5em;
   font-family: 'Loguetown';
   font-size: 2em;
-  text-decoration-color: red;
+  letter-spacing: 0;
+}
+.navbar-nav li a {
+  color: red;
+}
+li.active a {
+  color: red;
+}
+.navbar a active{
+  background-color: red;
 }
 li.active {
   background-color: black;
 }
 body{
   font-family: 'Kenyan coffee';
+  letter-spacing: 2px;
 }
