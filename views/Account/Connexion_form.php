@@ -1,10 +1,10 @@
 <div class="container text-center">
-  <h2>Connectez-vous</h2>
     <div class="col-md-4 mb-5">
-    <form>
+      <h2>Connectez-vous</h2>
+    <form method="POST">
       <div class="form-group">
-        <label for="exampleDropdownFormEmail2">Email</label>
-        <input type="email" class="form-control" id="exampleDropdownFormEmail2" name="mail" placeholder="email@example.com">
+        <label for="exampleDropdownFormEmail2">Identifiant</label>
+        <input type="text" class="form-control" id="exampleDropdownFormEmail2" name="identity" placeholder="email@example.com">
       </div>
       <div class="form-group">
         <label for="exampleDropdownFormPassword2">Mot de passe</label>

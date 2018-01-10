@@ -1,7 +1,7 @@
 <div class="container text-center">
-  <h2>Formulaire d'inscription</h2>
   <form method="POST">
   <div class="col-md-4 offset-5">
+    <h2>Formulaire d'inscription</h2>
     <div class="form-group">
       <label for="validationDefault01">Nom complet</label>
       <input type="text" class="form-control" id="validationDefault01" placeholder="fullname" name="fullname" required>

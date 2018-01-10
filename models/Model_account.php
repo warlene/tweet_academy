@@ -36,13 +36,38 @@ class Account {
   		mail = :mail,
   		password = :password,
   		registrationDate = NOW()");
-    $req->execute(array(':fullname' => $fullname, ':displayname' => $displayname, ':mail' => $mail, ':password' => $password));
-    return $req->errorInfo();
+    if ($req->execute(array(':fullname' => $fullname, ':displayname' => $displayname, ':mail' => $mail, ':password' => $password))) {
+  		return $bdd->lastInsertId();
+  	}
+  	 return $req->errorInfo();
   }
 
   public function hash_password($password){
     $hash_password = hash('ripemd160', $password . $this->salt);
     return $hash_password;
+  }
+
+  public function user_exists($identity, $password){
+    $bdd = Model::bdd_connect();
+    $req = $bdd->prepare("SELECT idUser, fullName, mail, password FROM user WHERE (fullName = :value OR mail = :value) AND password = :password");
+    $req->execute(array(':value' => $identity, ':password' => $password));
+    $result =$req->fetch(PDO::FETCH_ASSOC);
+    $req->closeCursor();
+    return $result['idUser'];
+  }
+
+  public function read_user_info($idUser) {
+    $bdd = Model::bdd_connect();
+  	  $requete = $bdd->prepare("SELECT idUser, fullName, displayName, mail, password, idUrlAvatar, theme, registrationDate, userStatus
+  		  FROM user
+  		  WHERE idUser = :iduser");
+      $requete->bindValue(':iduser', $idUser);
+      $requete->execute();
+      if ($result = $requete->fetch(PDO::FETCH_ASSOC)) {
+  		  $requete->closeCursor();
+  		  return $result;
+  	  }
+  	return false;
   }
 }
 ?>
