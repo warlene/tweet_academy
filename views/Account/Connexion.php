@@ -1,6 +1,6 @@
 <div class="container text-center">
-  <h2>Connectez-vous</h2>
-    <div class="col-md-4 mb-5">
+  <div class="col-md-4 mb-5">
+    <h2>Connectez-vous</h2>
     <form>
       <div class="form-group">
         <label for="exampleDropdownFormEmail2">Email</label>
