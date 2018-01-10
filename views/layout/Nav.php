@@ -31,7 +31,7 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="rooter.php">Tweet Academie</a></li>
+        <li class="active"><a href="rooter.php">Tweet Factory</a></li>
         <li><a href="rooter.php?controller=account&action=subscribe">Inscription</a></li>
         <li><a href="rooter.php?controller=account&action=connexion">Connexion</a></li>
       </ul>
