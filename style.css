@@ -35,10 +35,6 @@ li.active a {
 .navbar a active{
   background-color: red;
 }
-
-a.active {
-	background-color: red;
-}
 li.active {
   background-color: black;
 }
