@@ -27,17 +27,29 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <img src="images/factory.png" height="70" width="70">
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-          <li class="<?php if(empty($_GET)){ ?>active<?php }?>"><a href="rooter.php">Tweet Factory</a></li>
-          <li class="<?php if(isset($_GET['action']) && $_GET['action']=='subscribe'){ ?>active<?php } ?>">
-            <a href="rooter.php?controller=account&action=subscribe">Accueil</a></li>
-          <li class="<?php if(isset($_GET['action']) && $_GET['action']=='connexion'){ ?>active<?php } ?>">
-            <a href="rooter.php?controller=account&action=connexion">Notification</a></li>
+          <li class="<?php if(isset($_GET['action']) && $_GET['action']=='login'){ ?>active<?php } ?>">
+            <a href="rooter.php">Accueil</a></li>
+          <li class="<?php if(isset($_GET['action']) && $_GET['action']=='note'){ ?>active<?php } ?>">
+            <a href="rooter.php?controller=account&action=note">Notifications</a></li>
+            <li class="<?php if(isset($_GET['action']) && $_GET['action']=='message'){ ?>active<?php } ?>">
+              <a href="rooter.php?controller=account&action=message">Messages</a></li>
+            <li><img src="images/factory.png" height="70" width="70"></li>
+
+        <form class="navbar-form navbar-right" role="search">
+          <div class="form-group input-group">
+            <input type="text" class="form-control" placeholder="Search..">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button">
+                <span class="glyphicon glyphicon-search"></span>
+              </button>
+            </span>
             <li class="<?php if(isset($_GET['action']) && $_GET['action']=='logout'){ ?>active<?php } ?>">
             <a href="rooter.php?controller=account&action=logout">Deconnexion</a></li>
+          </div>
+        </form>
       </ul>
     </div>
   </div>
