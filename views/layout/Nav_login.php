@@ -33,11 +33,9 @@
       <ul class="nav navbar-nav">
           <li class="<?php if(empty($_GET)){ ?>active<?php }?>"><a href="rooter.php">Tweet Factory</a></li>
           <li class="<?php if(isset($_GET['action']) && $_GET['action']=='subscribe'){ ?>active<?php } ?>">
-            <a href="rooter.php?controller=account&action=subscribe">Accueil</a></li>
+            <a href="rooter.php?controller=account&action=subscribe">Inscription</a></li>
           <li class="<?php if(isset($_GET['action']) && $_GET['action']=='connexion'){ ?>active<?php } ?>">
-            <a href="rooter.php?controller=account&action=connexion">Notification</a></li>
-            <li class="<?php if(isset($_GET['action']) && $_GET['action']=='logout'){ ?>active<?php } ?>">
-            <a href="rooter.php?controller=account&action=logout">Deconnexion</a></li>
+            <a href="rooter.php?controller=account&action=connexion">Connexion</a></li>
       </ul>
     </div>
   </div>

@@ -69,5 +69,11 @@ class Account {
   	  }
   	return false;
   }
+
+  public function logout(){
+    $_SESSION = array();
+    session_destroy();
+    return true;
+  }
 }
 ?>

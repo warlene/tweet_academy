@@ -6,14 +6,13 @@ if(!empty($_POST)){
   $password = $form->hash_password($_POST['password']);
   $check = $form->user_exists($_POST['identity'], $password);
   if($check == null){
-    echo '<p>La connexion a échoué. Veuillez vérifier vos données et réessayer.</p>';
+    echo '<p>Ce compte n\'existe pas.</p>';
     include 'views/Account/Connexion_form.php';
   }
-  if(is_int(intval($check))){
+  else if(is_int(intval($check))){
     $user_infos = $form->read_user_info($check);
     if($user_infos == false){
-      echo '<p>Erreur lors de la connexion. Essayez plus tard.</p>';
-      include 'views/Account/Connexion_form.php';
+      echo '<p>La connexion a échoué. Veuillez vérifier vos données et réessayer.</p>';
     }
     else{
       $_SESSION['idUser'] = $check;
@@ -23,7 +22,7 @@ if(!empty($_POST)){
       $_SESSION['idUrlAvatar']  = $user_infos['idUrlAvatar'];
       $_SESSION['theme']  = $user_infos['theme'];
       $_SESSION['userStatus'] = $user_infos['userStatus'];
-      include 'views/Account/Connexion_ok.php';
+      include 'views/layout/News_homepage.php';
     }
   }
 }

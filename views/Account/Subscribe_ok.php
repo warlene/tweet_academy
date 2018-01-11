@@ -1,3 +1,5 @@
+<?php include 'views/layout/Nav.php'; ?>
+
 <div class="container text-center">
   <h2>Inscription validée.</h2>
   <h2>Bienvenue sur Tweet Factory <?php echo $_SESSION['fullName']; ?> !</h2>
