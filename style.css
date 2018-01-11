@@ -16,8 +16,8 @@
 .container.text-center {
 
 }
-.cover {
-
+h2 {
+  text-align:center;
 }
 .navbar-nav a {
   margin-top: .5em;
@@ -39,6 +39,6 @@ li.active {
   background-color: black;
 }
 body{
-  /* font-family: 'Kenyan coffee'; */
-  /* letter-spacing: 2px; */
+  /* font-family: 'Kenyan coffee';
+  letter-spacing: 2px; */
 }
