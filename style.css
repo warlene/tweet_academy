@@ -490,6 +490,10 @@ a {
 .profile-avatar {
   width: 218px;
   height: 218px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  border: 5px solid rgba(255,255,255,0.5);
   border: 1px solid #e1e1e1;
   background-color: #fff;
   right: 0;
@@ -498,6 +502,10 @@ a {
   width: 206px;
   height: 206px;
   margin: 5px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  border: 5px solid rgba(255,255,255,0.5);
   background-image: url(http://placekitten.com/220/220);
 }
 

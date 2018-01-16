@@ -15,19 +15,7 @@
     </div>
     <div class="col-sm-7">
 
-      <div class="row">
-        <div class="col-sm-12">
-          <div class="panel panel-default text-left">
-            <div class="panel-body">
-              <p contenteditable="true">Status: Feeling Blue</p>
-              <button type="button" class="btn btn-default btn-sm">
-                <span class="glyphicon glyphicon-thumbs-up"></span> Like
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      <!--
       <div class="row">
         <div class="col-sm-3">
           <div class="well">
@@ -73,4 +61,4 @@
   </div>
 </div>
 </body>
-</html>
+</html> -->
