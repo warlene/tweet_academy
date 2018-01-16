@@ -2,11 +2,10 @@
 class TweetController {
 
   public function print_tweet_controller(){
-    // include 'models/Model.php';
-    // $bdd = Model::bdd_connect();
-    include 'models/Model_tweet.php';
-    $tweet = new Tweet;
-
+    if(!isset($_POST)){
+      include 'models/Model_tweet.php';
+      $tweet = new Tweet;
+    }
     $tweet->print_tweet();
   }
 
