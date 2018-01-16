@@ -2,7 +2,6 @@
 <div class="card hovercard">
   <div class="cardheader">
   </div>
-
   <div class="avatar">
       <img alt="" src="images/factory.png">
   </div>
@@ -19,7 +18,7 @@
 			<li class="twPc-ArrangeSizeFit">
 				<a href="" title="9.840 Tweet">
 					<span class="twPc-StatLabel twPc-block">Tweets</span>
-					<span class="twPc-StatValue">9.840</span>
+					<span class="twPc-StatValue"><?php echo $_SESSION['count']; ?></span>
 				</a>
 			</li>
 			<li class="twPc-ArrangeSizeFit">
