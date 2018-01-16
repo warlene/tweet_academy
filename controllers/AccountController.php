@@ -87,6 +87,8 @@
             $_SESSION['theme']  = $user_infos['theme'];
             $_SESSION['userStatus'] = $user_infos['userStatus'];
             include 'views/layout/News_homepage.php';
+            include 'views/Tweet/Form_tweet.php';
+            include 'views/layout/End_page.php';
           }
         }
       }
