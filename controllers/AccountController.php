@@ -13,6 +13,9 @@
           include 'models/Model.php';
 
           $fullname = Model::clean_data($_POST['fullname']);
+
+          // $clean_data = trim($_POST['fullname']);
+
           $displayname = Model::clean_displayname($_POST['displayname']);
           $mail = $_POST['mail'];
           $password = $form->hash_password($_POST['password']);
