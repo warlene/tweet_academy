@@ -8,7 +8,9 @@ class Tweet {
     $tweet = $bdd->prepare("INSERT INTO tweet SET idUser = :idUser, tweetContent = :tweetContent, imgUrl = :imgUrl, idReTweet = :idReTweet, idReTweetFrom = :idReTweetFrom, deleted = :deleted");
 
     if($tweet->execute(array(':idUser' => $idUser, ':tweetContent' => $tweetContent, ':imgUrl' => $imgUrl, ':idReTweet' => $idReTweet, ':idReTweetFrom' => $idReTweetFrom, ':deleted' => 'false'))) {
-        return $bdd->lastInsertId();
+
+      return $bdd->lastInsertId();
+
     }
     return $req->errorInfo();
   }
@@ -22,6 +24,7 @@ class Tweet {
     while ($tweets  = $tweet->fetch()) {
       include 'views/Tweet/Tweet.php';
     }
+
   }
 
   public function count_tweet($idUser){
@@ -37,12 +40,12 @@ class Tweet {
     $hashtag = $bdd->prepare("INSERT INTO tag VALUES(idTweet,tagName)");
   }
   public function Find_hashtag($tweetContent){
-  $tweet .=' ';
-  preg_match_all('/#[0-9a-z-A-Z]*) /', $tweetContent,$hashtag);
-  if (isset($hashtag[1])){
-    return $hashtag [1];
-  }
-  return null;
+    $tweet .=' ';
+    preg_match_all('/#[0-9a-z-A-Z]*) /', $tweetContent,$hashtag);
+    if (isset($hashtag[1])){
+      return $hashtag [1];
+    }
+    return null;
   }
 }
 ?>
