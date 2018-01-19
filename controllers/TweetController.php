@@ -24,7 +24,6 @@ class TweetController {
     if ($_FILES['fileToUpload']['size'] > $maxsize){
       $erreur[] = "Le fichier est trop gros";
     }
-
     $image_sizes = getimagesize($_FILES['fileToUpload']['tmp_name']);
     if ($image_sizes[0] > $maxwidth OR $image_sizes[1] > $maxheight){
       $erreur[] = "Image trop grande";
@@ -41,7 +40,7 @@ class TweetController {
       }
     }
   }
-
+  
   public function send_form(){
     $form = new Tweet;
     $idUser = $_SESSION['idUser'];
