@@ -14,11 +14,16 @@
             <span><strong>Date de publication : </strong><?= $tweets['tweetDate'] ?></span><br>
             <?php
             if($tweets['imgUrl'] != null) {
-                ?> <img src="avatars/<?=$_FILES['fileToUpload']['name'];?>">
+                var_dump($tweets['imgUrl']);
+                var_dump($_FILES);
+                var_dump($_SESSION);
+                var_dump($tweets);
+                
+                ?> <img src="images/imgUrl/<?=$tweets['imgUrl'];?>">
                 <?php
             }
             ?>
-            <a href="#">Repondre</a>
+            <a href="views/Tweet/formReTweeter.php">Repondre</a>
             <a href="#">Retweet</a>
             <a href="#">J'aime</a>
 
