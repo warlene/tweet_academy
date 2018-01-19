@@ -1,3 +1,7 @@
+
+
+
+
 <?php
 include 'models/Model_tweet.php';
 
@@ -57,7 +61,7 @@ class TweetController {
   public function findTweetByHashtag(){
     $hashtag = new tweet;
     $tweetContent = $_POST['content_tweet'];
-    $hashtag-> Find_hashtag($tweetContent)
+    $hashtag-> Find_hashtag($tweetContent);
   }
   public function Stock_hastag_Controller(){
     $tag = findTweetByHashtag();

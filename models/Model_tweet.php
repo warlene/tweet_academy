@@ -9,7 +9,7 @@ class Tweet {
 
     if($tweet->execute(array(':idUser' => $idUser, ':tweetContent' => $tweetContent, ':imgUrl' => $imgUrl, ':idReTweet' => $idReTweet, ':idReTweetFrom' => $idReTweetFrom, ':deleted' => 'false'))) {
       var_dump($tweet->execute(array(':idUser' => $idUser, ':tweetContent' => $tweetContent, ':imgUrl' => $imgUrl, ':idReTweet' => $idReTweet, ':idReTweetFrom' => $idReTweetFrom, ':deleted' => 'false')));
-        return $bdd->lastInsertId();
+      return $bdd->lastInsertId();
     }
     return $req->errorInfo();
   }
@@ -35,14 +35,15 @@ class Tweet {
   }
   public function Stock_hashtag($tag){
     $bdd = Model::bdd_connect();
-    $hashtag = $bdd->prepare("INSERT INTO tag VALUES(idTweet,tagName)")
+    $hashtag = $bdd->prepare("INSERT INTO tag VALUES(idTweet,tagName)");
   }
   public function Find_hashtag($tweetContent){
-  $tweet .=' ';
-  preg_match_all('/#[0-9a-z-A-Z]*) /', $tweetContent,$hashtag);
-  if (isset($hashtag[1])){
-    return $hashtag [1];
+    $tweet .=' ';
+    preg_match_all('/#[0-9a-z-A-Z]*) /', $tweetContent,$hashtag);
+    if (isset($hashtag[1])){
+      return $hashtag [1];
+    }
+    return null;
   }
-  return null;
 }
 ?>
