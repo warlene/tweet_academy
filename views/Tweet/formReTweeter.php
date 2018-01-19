@@ -1,8 +1,6 @@
 <?php
-include'Tweet.php';
-var_dump($_FILES);
-var_dump($_SESSION);
-var_dump($tweets);?>
+// include'Tweet.php';
+?>
 
 
 <div class="row">

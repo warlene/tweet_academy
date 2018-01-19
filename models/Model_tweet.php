@@ -8,7 +8,7 @@ class Tweet {
     $tweet = $bdd->prepare("INSERT INTO tweet SET idUser = :idUser, tweetContent = :tweetContent, imgUrl = :imgUrl, idReTweet = :idReTweet, idReTweetFrom = :idReTweetFrom, deleted = :deleted");
 
     if($tweet->execute(array(':idUser' => $idUser, ':tweetContent' => $tweetContent, ':imgUrl' => $imgUrl, ':idReTweet' => $idReTweet, ':idReTweetFrom' => $idReTweetFrom, ':deleted' => 'false'))) {
-      var_dump($tweet->execute(array(':idUser' => $idUser, ':tweetContent' => $tweetContent, ':imgUrl' => $imgUrl, ':idReTweet' => $idReTweet, ':idReTweetFrom' => $idReTweetFrom, ':deleted' => 'false')));
+      // var_dump($tweet->execute(array(':idUser' => $idUser, ':tweetContent' => $tweetContent, ':imgUrl' => $imgUrl, ':idReTweet' => $idReTweet, ':idReTweetFrom' => $idReTweetFrom, ':deleted' => 'false')));
         return $bdd->lastInsertId();
     }
     return $req->errorInfo();
@@ -23,6 +23,7 @@ class Tweet {
     while ($tweets  = $tweet->fetch()) {
       include 'views/Tweet/Tweet.php';
     }
+    // return $tweets;
   }
 
   public function count_tweet($idUser){
@@ -35,7 +36,7 @@ class Tweet {
   }
   public function Stock_hashtag($tag){
     $bdd = Model::bdd_connect();
-    $hashtag = $bdd->prepare("INSERT INTO tag VALUES(idTweet,tagName)")
+    $hashtag = $bdd->prepare("INSERT INTO tag VALUES(idTweet,tagName)");
   }
   public function Find_hashtag($tweetContent){
   $tweet .=' ';
@@ -44,5 +45,6 @@ class Tweet {
     return $hashtag [1];
   }
   return null;
+  }
 }
 ?>

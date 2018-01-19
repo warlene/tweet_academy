@@ -14,16 +14,12 @@
             <span><strong>Date de publication : </strong><?= $tweets['tweetDate'] ?></span><br>
             <?php
             if($tweets['imgUrl'] != null) {
-                var_dump($tweets['imgUrl']);
-                var_dump($_FILES);
-                var_dump($_SESSION);
-                var_dump($tweets);
-                
+
                 ?> <img src="images/imgUrl/<?=$tweets['imgUrl'];?>">
                 <?php
             }
             ?>
-            <a href="views/Tweet/formReTweeter.php">Repondre</a>
+            <a href="rooter.php?controller=tweet&action=add_comment&idtweet=<?= $tweets['idTweet']; ?>">Repondre</a>
             <a href="#">Retweet</a>
             <a href="#">J'aime</a>
 
