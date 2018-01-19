@@ -11,8 +11,8 @@
           </div>
 
           <div>
-            <label for ="fileToUpload">Select image to upload:</label>
-            <input type="file" name="fileToUpload" id="fileToUpload">
+            <label for ="imgUrl">Select image to upload:</label>
+            <input type="file" name="imgUrl" id="imgUrl">
           </div>
 
           <input type="submit" name="add_tweet">

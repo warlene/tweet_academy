@@ -12,9 +12,11 @@
           $tweet->send_form();
         }
         $tweet->count_tweet_controller();
-        var_dump($_SESSION['count']);
+        var_dump($_SESSION);
         include 'views/layout/News_homepage.php';
         include 'views/Tweet/Form_tweet.php';
+        include 'views/Tweet/formReTweeter.php';
+
         $tweet->print_tweet_controller();
         include 'views/layout/End_page.php';
       }
