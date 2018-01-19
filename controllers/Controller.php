@@ -15,7 +15,7 @@
 
         include 'views/layout/News_homepage.php';
         include 'views/Tweet/Form_tweet.php';
-        include 'views/Tweet/formReTweeter.php';
+        // include 'views/Tweet/formReTweeter.php';
 
         $tweet->print_tweet_controller();
         include 'views/layout/End_page.php';

@@ -30,7 +30,7 @@ class TweetController {
         $extensionUpload = strtolower(substr(strrchr($_FILES['imgUrl']['name'], '.'), 1)); // recupere l'extension
 
         if(in_array($extensionUpload, $extensionsValides)) {
-          var_dump(in_array($extensionUpload, $extensionsValides));
+          // var_dump(in_array($extensionUpload, $extensionsValides));
           $chemin = "images/imgUrl/".$_FILES['imgUrl']['name'];
           $resultat = move_uploaded_file($_FILES['imgUrl']['tmp_name'], $chemin);
 
@@ -56,6 +56,9 @@ class TweetController {
     $_SESSION['count'] = $tweet->count_tweet($idUser);
   }
 
+  public function add_comment(){
+    include 'views/Tweet/formComment.php';
+  }
 
 
   public function findTweetByHashtag(){
