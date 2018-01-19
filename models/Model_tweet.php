@@ -32,5 +32,16 @@ class Tweet {
     $count = $tweet->fetch();
     return $count[0];
   }
+  public function Stock_hashtag($tag){
+    $bdd = Model::bdd_connect();
+    $hashtag = $bdd->prepare("INSERT INTO tag VALUES(idTweet,tagName)")
+  }
+  public function Find_hashtag($tweetContent){
+  $tweet .=' ';
+  preg_match_all('/#[0-9a-z-A-Z]*) /', $tweetContent,$hashtag);
+  if (isset($hashtag[1])){
+    return $hashtag [1];
+  }
+  return null;
 }
 ?>

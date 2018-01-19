@@ -33,5 +33,21 @@ class TweetController {
     $idUser = $_SESSION['idUser'];
     $_SESSION['count'] = $tweet->count_tweet($idUser);
   }
+
+    public function findTweetByHashtag(){
+      $hashtag = new tweet;
+      $tweetContent = $_POST['content_tweet'];
+      $hashtag-> Find_hashtag($tweetContent)
+  }
+  public function Stock_hastag_Controller(){
+    $tag = findTweetByHashtag();
+    if ($tag = null) {
+        return false;
+    }
+    else{
+      $hashtag = new tweet;
+      $hashtag->Stock_hashtag($tag);
+    }
+  }
 }
 ?>
