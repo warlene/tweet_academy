@@ -4,14 +4,14 @@
   <div class="row">
     <div class="col-sm-3 well">
       <?php include 'views/User/Profil_card.php'; ?>
-      <div class="alert alert-success fade in">
+      <!-- <div class="alert alert-success fade in">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
         <p><strong>Ey!</strong></p>
         People are looking at your profile. Find out who.
       </div>
       <p><a href="#">Link</a></p>
       <p><a href="#">Link</a></p>
-      <p><a href="#">Link</a></p>
+      <p><a href="#">Link</a></p> -->
     </div>
     <div class="col-sm-7">
 

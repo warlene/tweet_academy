@@ -12,7 +12,6 @@
           $tweet->send_form();
         }
         $tweet->count_tweet_controller();
-        var_dump($_SESSION['count']);
         include 'views/layout/News_homepage.php';
         include 'views/Tweet/Form_tweet.php';
         $tweet->print_tweet_controller();

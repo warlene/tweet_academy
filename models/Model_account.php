@@ -49,7 +49,7 @@ class Account {
 
   public function user_exists($identity, $password){
     $bdd = Model::bdd_connect();
-    $req = $bdd->prepare("SELECT idUser, fullName, mail, password FROM user WHERE (fullName = :value OR mail = :value) AND password = :password");
+    $req = $bdd->prepare("SELECT idUser, displayName, mail, password FROM user WHERE (displayName = :value OR mail = :value) AND password = :password");
     $req->execute(array(':value' => $identity, ':password' => $password));
     $result =$req->fetch(PDO::FETCH_ASSOC);
     $req->closeCursor();
