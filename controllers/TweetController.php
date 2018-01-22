@@ -50,7 +50,7 @@ class TweetController {
 
   }
 
-   public function count_tweet_controller(){
+  public function count_tweet_controller(){
     $tweet = new Tweet;
     $idUser = $_SESSION['idUser'];
     $_SESSION['count'] = $tweet->count_tweet($idUser);
@@ -66,6 +66,7 @@ class TweetController {
     $tweetContent = $_POST['content_tweet'];
     $hashtag-> Find_hashtag($tweetContent);
   }
+
   public function Stock_hastag_Controller(){
     $tag = findTweetByHashtag();
     if ($tag = null) {

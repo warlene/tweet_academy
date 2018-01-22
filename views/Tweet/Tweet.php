@@ -1,5 +1,11 @@
+<?php
+  require_once ('models/Model_account.php');
+  $date = new Account;
+  $date_ok = $date->change_date( $tweets['tweetDate']);
+?>
+
 <div class="row">
-  <div class="col-sm-12 col-lg-10">
+  <div class="col-lg-12 col-sm-6">
     <div class="panel panel-default text-left">
       <div class="panel-body">
         <div class="display_tweet">
@@ -9,7 +15,7 @@
             }
             ?>
             <div class="head-tweet">
-              <h4><span class="fullname"><strong><?= $tweets['fullName'] . " " ;?></strong></span><?= $tweets['displayName']  . " . " . $tweets['tweetDate'] ?></h4>
+              <h4><span class="fullname"><strong><?= $tweets['fullName'] . " " ;?></strong></span><?= $tweets['displayName']  . " . " . $date_ok ?></h4>
             </div>
             <p><?= $tweets['TweetContent'] ?></p>
             <?php
@@ -22,8 +28,6 @@
             <a href="rooter.php?controller=tweet&action=add_comment&idtweet=<?= $tweets['idTweet']; ?>" class="glyphicon glyphicon-pencil" data-toggle="tooltip" title="Répondre"></a>
             <a href="#" class="glyphicon glyphicon-refresh" data-toggle="tooltip" title="Retweeter"></a>
             <a href="#" class="glyphicon glyphicon-heart-empty" data-toggle="tooltip" title="J'aime"></a>
-
-
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 <?php
-include 'models/Model.php';
+require_once('models/Model.php');
 
 class Tweet {
 
@@ -27,6 +27,17 @@ class Tweet {
 
   }
 
+  public function print_tweet_user(){
+    $bdd = Model::bdd_connect();
+    $tweet = $bdd->prepare("SELECT displayName, fullName, user.idUser,idUrlAvatar, tweetDate, TweetContent, imgUrl, idTweet FROM tweet INNER JOIN user ON tweet.idUser = user.idUser WHERE tweet.idUser = " .$_SESSION['idUser']. " ORDER BY tweetDate DESC ");
+
+    $tweet->execute();
+
+    while ($tweets  = $tweet->fetch()) {
+      include 'views/Tweet/Tweet.php';
+    }
+  }
+
   public function count_tweet($idUser){
     $bdd = Model::bdd_connect();
     $tweet = $bdd->prepare("SELECT count(idTweet) FROM tweet INNER JOIN user ON tweet.idUser = user.idUser WHERE user.idUser = ? ");
@@ -35,6 +46,7 @@ class Tweet {
     $count = $tweet->fetch();
     return $count[0];
   }
+
   public function Stock_hashtag($tag){
     $bdd = Model::bdd_connect();
     $hashtag = $bdd->prepare("INSERT INTO tag VALUES(idTweet,tagName)");
