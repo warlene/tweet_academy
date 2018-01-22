@@ -6,8 +6,8 @@
     <div class="profile-avatar">
       <div class="inner"></div>
     </div>
-    <h1>Willabelle Ong</h1>
-    <h2>Enthusiast</h2>
+    <h1<?php echo $_SESSION['fullName'] ?></h1>
+    <h2><?php echo $_SESSION['displayName'] ?></h2>
     <div class="meta">
       <p><i class="fa fa-fw fa-map-marker"></i> Australia</p>
       <p><i class="fa fa-fw fa-link"></i> paledivision.com</p>

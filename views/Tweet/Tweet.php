@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-sm-12">
+  <div class="col-sm-12 col-lg-10">
     <div class="panel panel-default text-left">
       <div class="panel-body">
         <div class="display_tweet">
@@ -8,20 +8,21 @@
                 echo $tweets['idUrlAvatar'];
             }
             ?>
-            <span><strong>FullName : </strong><?= $tweets['fullName'] ?></span><br>
-            <span><strong>Pseudo : </strong><?= $tweets['displayName'] ?></span><br>
-            <span><strong>Tweet : </strong><?= $tweets['TweetContent'] ?></span><br>
-            <span><strong>Date de publication : </strong><?= $tweets['tweetDate'] ?></span><br>
+            <div class="head-tweet">
+              <h4><span class="fullname"><strong><?= $tweets['fullName'] . " " ;?></strong></span><?= $tweets['displayName']  . " . " . $tweets['tweetDate'] ?></h4>
+            </div>
+            <p><?= $tweets['TweetContent'] ?></p>
             <?php
             if($tweets['imgUrl'] != null) {
 
-                ?> <img src="images/imgUrl/<?=$tweets['imgUrl'];?>">
+                ?> <img src="images/imgUrl/<?=$tweets['imgUrl'];?>"><br>
                 <?php
             }
-            ?>
-            <a href="rooter.php?controller=tweet&action=add_comment&idtweet=<?= $tweets['idTweet']; ?>">Repondre</a>
-            <a href="#">Retweet</a>
-            <a href="#">J'aime</a>
+            ?><br/>
+            <a href="rooter.php?controller=tweet&action=add_comment&idtweet=<?= $tweets['idTweet']; ?>" class="glyphicon glyphicon-pencil" data-toggle="tooltip" title="Répondre"></a>
+            <a href="#" class="glyphicon glyphicon-refresh" data-toggle="tooltip" title="Retweeter"></a>
+            <a href="#" class="glyphicon glyphicon-heart-empty" data-toggle="tooltip" title="J'aime"></a>
+
 
         </div>
       </div>

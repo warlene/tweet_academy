@@ -10,18 +10,60 @@
   font-family: 'fontastique';
   src:url('font/fontastique.ttf');
 }
+
+@font-face {
+  font-family: 'walkway';
+  src:url('font/Walkway Bold.ttf');
+}
+body {
+  background-color: #EFF8FB;
+  font-family: 'walkway';
+}
 .container.text-center .btn-secondary {
   background-color: #E0ECF8;
 }
-/* .container-fluid {
-  display: flex;
-  flex-direction:row;
-}
-.container.text-center {
+.col-sm-3.well {
+  background-color: white;
 
-} */
+}
+input, textarea {
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+#imgUrl{
+  display: none;
+}
+.btn-form{
+  background-color: #81BEF7;
+  color: #fff;
+}
+.panel .glyphicon {
+  color: #81BEF7;
+  float: left;
+  font-size:30px;
+}
+.panel h3{
+  margin-top: 0;
+}
+.panel-body input {
+  float: right;
+}
 h2 {
   text-align:center;
+}
+p, h6 {
+  color: #848484;
+}
+.fullname {
+  color: black;
+}
+.display_tweet, .display_tweet a {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.display_tweet .glyphicon {
+  font-size:20px;
+
 }
 #myNavBar {
   display: flex;
@@ -45,10 +87,6 @@ li.active a {
 }
 li.active {
   background-color: black;
-}
-body{
-  /* font-family: 'Kenyan coffee';
-  letter-spacing: 2px; */
 }
 .navbar-form{
   padding-top: 12px;
@@ -254,7 +292,7 @@ a.dropdown-item {
     padding-top: 0;
     overflow: hidden;
     text-align: center;
-    background-color: rgba(214, 224, 226, 0.2);
+    background-color: #EFF8FB;
 }
 
 .card.hovercard .cardheader {
