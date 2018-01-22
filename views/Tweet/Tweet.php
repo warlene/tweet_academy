@@ -19,7 +19,7 @@
                 <?php
             }
             ?><br/>
-            <a href="rooter.php?controller=tweet&action=add_comment&idtweet=<?= $tweets['idTweet']; ?>" class="glyphicon glyphicon-pencil" data-toggle="tooltip" title="Répondre"></a>
+            <a href="rooter.php?controller=tweet&action=send_answer_tweet&idtweet=<?= $tweets['idTweet']; ?>" class="glyphicon glyphicon-pencil" data-toggle="tooltip" title="Répondre"></a>
             <a href="#" class="glyphicon glyphicon-refresh" data-toggle="tooltip" title="Retweeter"></a>
             <a href="#" class="glyphicon glyphicon-heart-empty" data-toggle="tooltip" title="J'aime"></a>
 

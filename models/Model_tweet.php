@@ -35,6 +35,26 @@ class Tweet {
     $count = $tweet->fetch();
     return $count[0];
   }
+
+  public function answer_tweet($idUser, $idtweet, $answer_tweet_content, $imgUrl_answer_tweet){
+    $bdd = Model::bdd_connect();
+    $sql = $bdd->prepare("INSERT INTO comment SET 
+      idUser = :idUser,
+      idTweet = :idTweet, 
+      commentContent = :commentContent,
+      imgUrl = :imgUrl");  
+      /*:imgUrl_answer_tweet = :imgUrl");*/
+    $answer_tweet =  $sql->execute(array(
+      ':idUser' => $idUser,
+      ':idTweet' => $idtweet,
+      ':commentContent' => $answer_tweet_content,
+      ':imgUrl' => $imgUrl_answer_tweet
+      ));
+    var_dump($answer_tweet);
+    return $answer_tweet;
+  }
+
+
   public function Stock_hashtag($tag){
     $bdd = Model::bdd_connect();
     $hashtag = $bdd->prepare("INSERT INTO tag VALUES(idTweet,tagName)");
