@@ -1,4 +1,7 @@
 <?php
+  require_once('controllers/TweetController.php');
+  require_once('controllers/UserController.php');
+
   class Controller {
 
     public function index(){
@@ -6,13 +9,16 @@
         include 'views/layout/Homepage.php';
       }
       if(isset($_SESSION['idUser'])){
-        include 'controllers/TweetController.php';
         $tweet = new TweetController;
         if(isset($_POST['content_tweet'])){
           $tweet->send_form();
         }
         $tweet->count_tweet_controller();
 
+        $follow = new UserController;
+        $follow->count_followers_controller();
+        $follow->count_followings_controller();
+        $follow->count_likes_controller();
         include 'views/layout/News_homepage.php';
         include 'views/Tweet/Form_tweet.php';
         // include 'views/Tweet/formReTweeter.php';

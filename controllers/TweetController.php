@@ -109,6 +109,8 @@ public function findTweetByHashtag(){
   $tweetContent = $_POST['content_tweet'];
   $hashtag-> Find_hashtag($tweetContent);
 }
+
+
 public function Stock_hastag_Controller(){
   $tag = findTweetByHashtag();
   if ($tag = null) {
@@ -118,6 +120,7 @@ public function Stock_hastag_Controller(){
     $hashtag = new tweet;
     $hashtag->Stock_hashtag($tag);
   }
+
 }
 }
 ?>

@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-sm-12 col-lg-10">
+  <div class="col-sm-12">
     <div class="panel panel-default text-left">
       <div class="panel-body">
         <h3>Ajouter un tweet</h3>
