@@ -25,11 +25,11 @@
           <a href="rooter.php?controller=account&action=message">Messages</a></li>
       </ul>
     </div>
-      <form class="navbar-form navbar-right" role="search">
+      <form method="post" action="" class="navbar-form navbar-right" role="search">
         <div class="form-group input-group">
-          <input type="text" class="form-control" placeholder="Recherche de #">
+          <input  type="text" name="search_tag" class="form-control" placeholder="Recherche de #">
           <span class="input-group-btn">
-            <button class="btn btn-default" type="button">
+            <button name="confirm_tag" class="btn btn-default" type="submit">
               <span class="glyphicon glyphicon-search"></span>
             </button>
           </span>
