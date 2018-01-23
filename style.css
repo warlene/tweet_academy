@@ -10,18 +10,64 @@
   font-family: 'fontastique';
   src:url('font/fontastique.ttf');
 }
+
+@font-face {
+  font-family: 'walkway';
+  src:url('font/Walkway Bold.ttf');
+}
+body {
+  background-color: #EFF8FB;
+  font-family: 'walkway';
+}
 .container.text-center .btn-secondary {
   background-color: #E0ECF8;
 }
-/* .container-fluid {
-  display: flex;
-  flex-direction:row;
-}
-.container.text-center {
+.col-sm-3.well {
+  background-color: white;
 
-} */
+}
+input, textarea {
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+#imgUrl, .collapse .picture {
+  display: none;
+}
+.btn-form{
+  background-color: #81BEF7;
+  color: #fff;
+}
+.panel .glyphicon {
+  color: #81BEF7;
+  float: left;
+  font-size:30px;
+}
+.panel h3{
+  margin-top: 10px;
+}
+.panel-body input {
+  float: right;
+}
 h2 {
   text-align:center;
+}
+.left-col h2 {
+  margin-top: 0;
+  text-align:left;
+}
+p, h6 {
+  color: #848484;
+}
+.fullname {
+  color: black;
+}
+.display_tweet, .display_tweet a {
+  padding-left: 20px;
+  padding-right: 30px;
+}
+.display_tweet .glyphicon {
+  font-size:20px;
+
 }
 #myNavBar {
   display: flex;
@@ -45,10 +91,6 @@ li.active a {
 }
 li.active {
   background-color: black;
-}
-body{
-  /* font-family: 'Kenyan coffee';
-  letter-spacing: 2px; */
 }
 .navbar-form{
   padding-top: 12px;
@@ -254,7 +296,7 @@ a.dropdown-item {
     padding-top: 0;
     overflow: hidden;
     text-align: center;
-    background-color: rgba(214, 224, 226, 0.2);
+    background-color: #EFF8FB;
 }
 
 .card.hovercard .cardheader {
@@ -378,6 +420,7 @@ ul.twPc-Arrange {
 .twPc-ArrangeSizeFit {
     display: table-cell;
     padding: 0;
+    margin: 0;
     vertical-align: top;
 }
 .twPc-ArrangeSizeFit a:hover {
@@ -396,6 +439,16 @@ ul.twPc-Arrange {
     overflow: hidden;
     text-transform: uppercase;
     transition: color 0.15s ease-in-out 0s;
+}
+.navbar-nav .twPc-StatLabel, .navbar-nav .twPc-block {
+  padding-top : 5px;
+  padding-bottom : 5px;
+  font-size: 25px;
+  text-transform: none;
+}
+.navbar-nav .twPc-StatValue {
+  margin-top: 5px;
+  color: #8899a6;
 }
 /* apply a natural box layout model to all elements */
 *, *:before, *:after {
@@ -428,7 +481,7 @@ a {
   background-color: #f5f5f5;
   position: relative;
   z-index: 1;
-  background-image: url(http://placekitten.com/980/250);
+  background-image: url();
 }
 
 .body {
@@ -441,7 +494,7 @@ a {
 .left-col, .right-col {
   width: 226px;
   float: left;
-  min-height: 400px;
+  min-height: 100%;
   position: relative;
 }
 
@@ -454,9 +507,10 @@ a {
 
 .center-col {
   float: left;
-  width: 480px;
+  width: 650px;
   margin-right: 24px;
-  min-height: 400px;
+  margin-left: 17px;
+  /* min-height: 400px; */
 }
 
 .right-col {
@@ -505,7 +559,7 @@ a {
   -moz-border-radius: 50%;
   border-radius: 50%;
   border: 5px solid rgba(255,255,255,0.5);
-  background-image: url(http://placekitten.com/220/220);
+  background-image: url(images/factory.png);
 }
 
 /* CENTER */
@@ -531,10 +585,16 @@ a {
 }
 
 .profile-nav {
-  height: 46px;
+  height: 80px;
+  width: 100%;
   background-color: white;
+  border-top: 2px solid #E1E1E1;
   border-bottom: 2px solid #E1E1E1;
   margin-bottom: 8px;
+}
+.profile-nav a {
+  margin-top: 0;
+  margin-bottom: 0;
 }
 .profile-nav ul > li {
   color: #999;

@@ -2,27 +2,14 @@
   <div class="col-sm-12">
     <div class="panel panel-default text-left">
       <div class="panel-body">
-        <h2>Ajouter un tweet</h2>
+        <h3>Ajouter un tweet</h3>
 
-        <form action="" method="post" enctype="multipart/form-data">
-          <div>
-            <label for="content_tweet">Content :</label>
-            <textarea type="file" name="content_tweet" id="content_tweet" maxlength="140" rows="3" cols="60"></textarea><br><br>
-          </div>
-
-          <div>
-
-            <label for ="imgUrl">Select image to upload:</label>
-            <input type="file" name="imgUrl" id="imgUrl">
-            
-          </div>
-
-          <input type="submit" name="add_tweet">
-          <br><br>
+        <form action="" class="form" method="post" enctype="multipart/form-data">
+          <textarea type="file"class="form-control" name="content_tweet" id="content_tweet" placeholder="Ecrivez votre tweet" maxlength="140" rows="3"></textarea>
+          <label for ="imgUrl" class="glyphicon glyphicon-picture"></label>
+          <input type="file" name="imgUrl" id="imgUrl">
+          <input type="submit" class="btn btn-form" name="add_tweet">
         </form>
-        <!-- <button type="button" class="btn btn-default btn-sm">
-          <span class="glyphicon glyphicon-thumbs-up"></span> Like
-        </button> -->
       </div>
     </div>
   </div>

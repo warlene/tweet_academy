@@ -1,5 +1,5 @@
 <?php
-include 'models/Model.php';
+require_once('models/Model.php');
 
 class Tweet {
 
@@ -24,7 +24,32 @@ class Tweet {
     while ($tweets  = $tweet->fetch()) {
       include 'views/Tweet/Tweet.php';
     }
+  }
 
+  public function print_tweet_user(){
+    $bdd = Model::bdd_connect();
+    $tweet = $bdd->prepare("SELECT displayName, fullName, user.idUser,idUrlAvatar, tweetDate, TweetContent, imgUrl, idTweet FROM tweet INNER JOIN user ON tweet.idUser = user.idUser WHERE tweet.idUser = " .$_SESSION['idUser']. " ORDER BY tweetDate DESC ");
+
+    $tweet->execute();
+
+    while ($tweets  = $tweet->fetch()) {
+      include 'views/Tweet/Tweet.php';
+    }
+  }
+
+
+  public function print_answer_tweet(){
+  /*SELECT comment.idUser,fullName, displayName, commentContent, imgUrl, commentCreationDate FROM comment INNER JOIN user ON user.idUser = comment.idUser WHERE idTweet = 28 ORDER BY commentContent DESC */
+    $bdd = Model::bdd_connect();
+    $answer_tweet = $bdd->prepare("SELECT comment.idUser,fullName, displayName, commentContent, imgUrl, commentCreationDate 
+                          FROM comment 
+                          INNER JOIN user ON user.idUser = comment.idUser 
+                          WHERE idTweet = ? 
+                          ORDER BY commentContent DESC ");
+    $answer_tweet->execute([$_GET['idtweet']]);
+    while($all_answer_tweet = $answer_tweet->fetch()){
+      include('views/Tweet/display_answer_tweet.php');
+    }
   }
 
   public function count_tweet($idUser){
@@ -35,6 +60,30 @@ class Tweet {
     $count = $tweet->fetch();
     return $count[0];
   }
+
+
+  public function answer_tweet($idUser, $idtweet, $answer_tweet_content, $imgUrl_answer_tweet){
+    $bdd = Model::bdd_connect();
+    $sql = $bdd->prepare("INSERT INTO comment SET
+      idUser = :idUser,
+      idTweet = :idTweet,
+      commentContent = :commentContent,
+      imgUrl = :imgUrl");
+      /*:imgUrl_answer_tweet = :imgUrl");*/
+    $answer_tweet =  $sql->execute(array(
+      ':idUser' => $idUser,
+      ':idTweet' => $idtweet,
+      ':commentContent' => $answer_tweet_content,
+      ':imgUrl' => $imgUrl_answer_tweet
+      ));
+    var_dump($answer_tweet);
+    return $answer_tweet;
+  }
+
+
+
+
+
   public function Stock_hashtag($tag){
     $bdd = Model::bdd_connect();
     $hashtag = $bdd->prepare("INSERT INTO tag VALUES(idTweet,tagName)");

@@ -1,4 +1,4 @@
-<?php
+	<?php
 class Model{
 
 	const HOST = "localhost";
@@ -21,7 +21,7 @@ class Model{
 
 
 	public function __construct(){
-		
+
 		if (!isset (self::$instance)){
 			$option = array (
 				PDO :: ATTR_PERSISTENT => true,
@@ -31,7 +31,7 @@ class Model{
 		return self::$instance;
 	}
 
-	
+
 
   public static function clean_data($data){
     $clean_data = trim($data);

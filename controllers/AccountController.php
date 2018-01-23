@@ -1,17 +1,16 @@
 <?php
   require_once('controllers/Controller.php');
+  require_once('models/Model_account.php');
+  require_once('models/Model.php');
 
   class AccountController extends Controller {
 
     function subscribe(){
       if(!empty($_POST)){
-        include 'models/Model_account.php';
         $form = new Account;
         $check_value = $form->check_form_values();
 
         if($check_value == true){
-          include 'models/Model.php';
-
           $fullname = Model::clean_data($_POST['fullname']);
 
           // $clean_data = trim($_POST['fullname']);
@@ -48,6 +47,8 @@
                 $_SESSION['idUrlAvatar']  = $user_infos['idUrlAvatar'];
                 $_SESSION['theme']  = $user_infos['theme'];
                 $_SESSION['userStatus'] = $user_infos['userStatus'];
+                $date = $form->change_date($user_infos['registrationDate']);
+                $_SESSION['registrationDate'] = $date;
                 include 'views/Account/Subscribe_ok.php';
               }
             }
@@ -64,8 +65,6 @@
 
     function login(){
       if(!empty($_POST)){
-        include 'models/Model_account.php';
-        include 'models/Model.php';
         $form = new Account;
         $password = $form->hash_password($_POST['password']);
         $check = $form->user_exists($_POST['identity'], $password);
@@ -86,6 +85,8 @@
             $_SESSION['idUrlAvatar']  = $user_infos['idUrlAvatar'];
             $_SESSION['theme']  = $user_infos['theme'];
             $_SESSION['userStatus'] = $user_infos['userStatus'];
+            $date = $form->change_date($user_infos['registrationDate']);
+            $_SESSION['registrationDate'] = $date;
             header('Location: http://localhost/work/Projet_Web_tweet_academie/rooter.php');
           }
         }
@@ -96,7 +97,6 @@
     }
 
     function logout(){
-      include 'models/Model_account.php';
       $session = new Account;
       $session->logout();
       include 'views/Account/Logout.php';

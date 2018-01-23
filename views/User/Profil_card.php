@@ -13,29 +13,29 @@
 
         <div class="info">
             <div class="title">
-                <a target="_blank" href="images/factory.png"><?php echo $_SESSION['fullName'] ?></a>
+                <a target="_blank" href="images/factory.png"><?= $_SESSION['fullName'] ?></a>
             </div>
-            <div class="desc" href="views/User/User_Profil.php"><?php echo $_SESSION['displayName'] ?></div>
+            <div class="desc" href="views/User/User_Profil.php"><?= $_SESSION['displayName'] ?></div>
         </div>
 
         <div class="twPc-divStats">
       		<ul class="twPc-Arrange">
       			<li class="twPc-ArrangeSizeFit">
-      				<a href="" title="9.840 Tweet">
+      				<a href="" title="<?= $_SESSION['count']; ?> Tweet">
       					<span class="twPc-StatLabel twPc-block">Tweets</span>
-      					<span class="twPc-StatValue"><?php echo $_SESSION['count']; ?></span>
+      					<span class="twPc-StatValue"><?= $_SESSION['count']; ?></span>
       				</a>
       			</li>
       			<li class="twPc-ArrangeSizeFit">
-      				<a href="" title="885 Following">
+      				<a href="" title="<?= $_SESSION['countFollowings']; ?> Following">
       					<span class="twPc-StatLabel twPc-block">Abonnements</span>
-      					<span class="twPc-StatValue">885</span>
+      					<span class="twPc-StatValue"><?= $_SESSION['countFollowings']; ?></span>
       				</a>
       			</li>
       			<li class="twPc-ArrangeSizeFit">
-      				<a href="" title="1.810 Followers">
+      				<a href="" title="<?= $_SESSION['countFollowers']; ?> Followers">
       					<span class="twPc-StatLabel twPc-block">Abonnés</span>
-      					<span class="twPc-StatValue">1.810</span>
+      					<span class="twPc-StatValue"><?= $_SESSION['countFollowers']; ?></span>
       				</a>
       			</li>
       		</ul>

@@ -1,5 +1,11 @@
+<?php
+  require_once ('models/Model_account.php');
+  $date = new Account;
+  $date_ok = $date->change_date( $tweets['tweetDate']);
+?>
+
 <div class="row">
-  <div class="col-sm-12">
+  <div class="col-lg-12 col-sm-6">
     <div class="panel panel-default text-left">
       <div class="panel-body">
         <div class="display_tweet">
@@ -8,21 +14,22 @@
                 echo $tweets['idUrlAvatar'];
             }
             ?>
-            <span><strong>FullName : </strong><?= $tweets['fullName'] ?></span><br>
-            <span><strong>Pseudo : </strong><?= $tweets['displayName'] ?></span><br>
-            <span><strong>Tweet : </strong><?= $tweets['TweetContent'] ?></span><br>
-            <span><strong>Date de publication : </strong><?= $tweets['tweetDate'] ?></span><br>
+            <div class="head-tweet">
+              <h4><span class="fullname"><strong><?= $tweets['fullName'] . " " ;?></strong></span><?= $tweets['displayName']  . " . " . $date_ok ?></h4>
+            </div>
+            <p><?= $tweets['TweetContent'] ?></p>
             <?php
             if($tweets['imgUrl'] != null) {
-
-                ?> <img src="images/imgUrl/<?=$tweets['imgUrl'];?>">
+                ?> <img src="images/imgUrl/<?=$tweets['imgUrl'];?>"><br>
                 <?php
             }
-            ?>
-            <a href="rooter.php?controller=tweet&action=add_comment&idtweet=<?= $tweets['idTweet']; ?>">Repondre</a>
-            <a href="#">Retweet</a>
-            <a href="#">J'aime</a>
-
+            ?><br/>
+            <a href="#<?=$tweets['idTweet'];?>" class="glyphicon glyphicon-pencil" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="<?=$tweets['idTweet'];?>" title="Répondre"></a>
+            <a href="#" class="glyphicon glyphicon-refresh" data-toggle="tooltip" title="Retweeter"></a>
+            <a href="#" class="glyphicon glyphicon-heart-empty" data-toggle="tooltip" title="J'aime"></a><br/><br/>
+            <div class="collapse" id="<?=$tweets['idTweet'];?>">
+              <?php include 'views/Tweet/FormAnswerTweet.php'; ?>
+            </div>
         </div>
       </div>
     </div>

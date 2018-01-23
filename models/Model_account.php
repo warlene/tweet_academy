@@ -1,4 +1,5 @@
 <?php
+require_once('models/Model.php');
 class Account {
   private $salt = "si tu aimes la wac tape dans tes mains";
 
@@ -74,6 +75,43 @@ class Account {
     $_SESSION = array();
     session_destroy();
     return true;
+  }
+
+  public function change_date($date){
+    $arr = explode(" ", $date);
+    $temp = array_reverse($arr);
+    $array = array_pop($temp);
+    $arr = explode("-", $array);
+    $temp = array_reverse($arr);
+    $date_ok = implode("/",$temp);
+    return $date_ok;
+  }
+
+  public function count_followers($idUser){
+    $bdd = Model::bdd_connect();
+    $tweet = $bdd->prepare("SELECT count(idFollower) FROM follow INNER JOIN user ON follow.idFollowed = user.idUser WHERE user.idUser = ? ");
+
+    $tweet->execute(array($idUser));
+    $count = $tweet->fetch();
+    return $count[0];
+  }
+
+  public function count_followings($idUser){
+    $bdd = Model::bdd_connect();
+    $tweet = $bdd->prepare("SELECT count(idFollowed) FROM follow INNER JOIN user ON follow.idFollower = user.idUser WHERE user.idUser = ? ");
+
+    $tweet->execute(array($idUser));
+    $count = $tweet->fetch();
+    return $count[0];
+  }
+
+  public function count_likes($idUser){
+    $bdd = Model::bdd_connect();
+    $tweet = $bdd->prepare("SELECT count(idLike) FROM likes INNER JOIN user ON likes.idUser = user.idUser WHERE user.idUser = ? ");
+
+    $tweet->execute(array($idUser));
+    $count = $tweet->fetch();
+    return $count[0];
   }
 }
 ?>

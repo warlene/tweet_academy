@@ -17,7 +17,7 @@
     <div class="collapse navbar-collapse col-md-6" id="myNavbar">
       <ul class="nav navbar-nav">
         <li><img src="images/factory.png" height="70" width="70"></li>
-        <li class="<?php if(isset($_GET['action']) && $_GET['action']=='login'){ ?>active<?php } ?>">
+        <li class="<?php if(!isset($_GET['action'])){ ?>active<?php } ?>">
           <a href="rooter.php">Accueil</a></li>
         <li class="<?php if(isset($_GET['action']) && $_GET['action']=='note'){ ?>active<?php } ?>">
           <a href="rooter.php?controller=account&action=note">Notifications</a></li>
@@ -36,7 +36,7 @@
         </div>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown <?php if(isset($_GET['action']) && $_GET['action']=='profil'){ ?>active<?php } ?>">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Profil
         </a>
