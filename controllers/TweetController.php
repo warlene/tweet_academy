@@ -45,6 +45,11 @@ class TweetController {
     }
   }
 
+  public function display_answer_tweet(){
+    $tweet = new Tweet();
+    $tweet->print_answer_tweet();
+  }
+
   public function count_tweet_controller(){
     $tweet = new Tweet;
     $idUser = $_SESSION['idUser'];
@@ -69,6 +74,7 @@ class TweetController {
           $result = move_uploaded_file($_FILES['imgUrl_answer_tweet']['tmp_name'], $path);
           if ($result || (!empty($answer_tweet_content) || !empty($imgUrl_answer_tweet))){
             $add_answer_tweet = $form->answer_tweet($idUser, $idtweet, $answer_tweet_content, $imgUrl_answer_tweet);
+            header('Location: views/Tweet/display_answer_tweet.php');
           } else {
             $msg = "Erreur durant l'importation de votre photo";
           }
@@ -83,6 +89,8 @@ class TweetController {
   }
 
 }
+
+
 
 
 public function findTweetByHashtag(){

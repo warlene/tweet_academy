@@ -1,0 +1,12 @@
+<h1>Réponse au tweet</h1>
+
+
+<?php
+while($all_answer_tweet =  $answer_tweet->fetch()){
+	?>
+	<p>
+		<span>Fullname : </span><?= $answer_tweet['Fullname']; ?>
+	</p>
+}
+
+?>

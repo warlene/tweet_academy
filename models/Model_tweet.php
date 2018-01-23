@@ -37,6 +37,21 @@ class Tweet {
     }
   }
 
+
+  public function print_answer_tweet(){
+  /*SELECT comment.idUser,fullName, displayName, commentContent, imgUrl, commentCreationDate FROM comment INNER JOIN user ON user.idUser = comment.idUser WHERE idTweet = 28 ORDER BY commentContent DESC */
+    $bdd = Model::bdd_connect();
+    $answer_tweet = $bdd->prepare("SELECT comment.idUser,fullName, displayName, commentContent, imgUrl, commentCreationDate 
+                          FROM comment 
+                          INNER JOIN user ON user.idUser = comment.idUser 
+                          WHERE idTweet = ? 
+                          ORDER BY commentContent DESC ");
+    $answer_tweet->execute([$_GET['idtweet']]);
+    while($all_answer_tweet = $answer_tweet->fetch()){
+      include('views/Tweet/display_answer_tweet.php');
+    }
+  }
+
   public function count_tweet($idUser){
     $bdd = Model::bdd_connect();
     $tweet = $bdd->prepare("SELECT count(idTweet) FROM tweet INNER JOIN user ON tweet.idUser = user.idUser WHERE user.idUser = ? ");
@@ -64,6 +79,8 @@ class Tweet {
     var_dump($answer_tweet);
     return $answer_tweet;
   }
+
+
 
 
 
