@@ -19,11 +19,14 @@
         $follow->count_followers_controller();
         $follow->count_followings_controller();
         $follow->count_likes_controller();
+
         include 'views/layout/News_homepage.php';
         include 'views/Tweet/Form_tweet.php';
-        // include 'views/Tweet/formReTweeter.php';
-
+        if(isset($_POST['answer_tweet_content'])){
+          $tweet->send_answer_tweet($_POST['idTweet']);
+        }
         $tweet->print_tweet_controller();
+
         include 'views/layout/End_page.php';
       }
     }

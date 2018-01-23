@@ -20,14 +20,16 @@
             <p><?= $tweets['TweetContent'] ?></p>
             <?php
             if($tweets['imgUrl'] != null) {
-
                 ?> <img src="images/imgUrl/<?=$tweets['imgUrl'];?>"><br>
                 <?php
             }
             ?><br/>
-            <a href="rooter.php?controller=tweet&action=add_comment&idtweet=<?= $tweets['idTweet']; ?>" class="glyphicon glyphicon-pencil" data-toggle="tooltip" title="Répondre"></a>
+            <a href="#<?=$tweets['idTweet'];?>" class="glyphicon glyphicon-pencil" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="<?=$tweets['idTweet'];?>" title="Répondre"></a>
             <a href="#" class="glyphicon glyphicon-refresh" data-toggle="tooltip" title="Retweeter"></a>
-            <a href="#" class="glyphicon glyphicon-heart-empty" data-toggle="tooltip" title="J'aime"></a>
+            <a href="#" class="glyphicon glyphicon-heart-empty" data-toggle="tooltip" title="J'aime"></a><br/><br/>
+            <div class="collapse" id="<?=$tweets['idTweet'];?>">
+              <?php include 'views/Tweet/FormAnswerTweet.php'; ?>
+            </div>
         </div>
       </div>
     </div>

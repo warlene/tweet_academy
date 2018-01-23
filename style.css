@@ -30,7 +30,7 @@ input, textarea {
   border-radius: 8px;
   margin-bottom: 10px;
 }
-#imgUrl{
+#imgUrl, .collapse .picture {
   display: none;
 }
 .btn-form{
@@ -43,7 +43,7 @@ input, textarea {
   font-size:30px;
 }
 .panel h3{
-  margin-top: 0;
+  margin-top: 10px;
 }
 .panel-body input {
   float: right;
