@@ -1,7 +1,3 @@
-
-
-
-
 <?php
 include 'models/Model_tweet.php';
 
@@ -54,6 +50,11 @@ class TweetController {
 
   }
 
+  public function display_answer_tweet(){
+    $tweet = new Tweet();
+    $tweet->print_answer_tweet();
+  }
+
   public function count_tweet_controller(){
     $tweet = new Tweet;
     $idUser = $_SESSION['idUser'];
@@ -62,21 +63,13 @@ class TweetController {
 
   public function send_answer_tweet(){
     include 'views/Tweet/FormAnswerTweet.php';
-   /* var_dump($_POST, $_FILES['imgUrl_answer_tweet']['name']);
-    var_dump(isset($_POST['answer_tweet']));
-    var_dump(isset(imgUrl_answer_tweet);
-    var_dump(isset($_POST['answer_tweet_content']) && !empty($_POST['answer_tweet_content']));*/
+   
     $form = new Tweet;
     $idUser = $_SESSION['idUser'];
     $answer_tweet_content = isset($_POST['answer_tweet_content']) ? $_POST['answer_tweet_content'] : null;
     $imgUrl_answer_tweet = isset($_POST['imgUrl_answer_tweet'])? $_POST['imgUrl_answer_tweet'] : null;
     $imgUrl_answer_tweet = isset($_FILES['imgUrl_answer_tweet']['name']) ? $_FILES['imgUrl_answer_tweet']['name'] : null; 
     $idtweet = isset($_GET['idtweet']) ? $_GET['idtweet'] : null;
-    var_dump($idUser);
-    var_dump($_GET['idtweet']);
-    var_dump($answer_tweet_content);
-    var_dump( $imgUrl_answer_tweet);
-
     if (!empty($answer_tweet_content) || !empty($imgUrl_answer_tweet)){
       $widthMax = 2097152;
       $validated_extention = array('jpg', 'jpeg', 'gif', 'png');
@@ -88,6 +81,7 @@ class TweetController {
           $result = move_uploaded_file($_FILES['imgUrl_answer_tweet']['tmp_name'], $path);
           if ($result || (!empty($answer_tweet_content) || !empty($imgUrl_answer_tweet))){
             $add_answer_tweet = $form->answer_tweet($idUser, $idtweet, $answer_tweet_content, $imgUrl_answer_tweet);
+            header('Location: views/Tweet/display_answer_tweet.php');
           } else {
             $msg = "Erreur durant l'importation de votre photo";
           } 
@@ -102,6 +96,8 @@ class TweetController {
   }
 
 }
+
+
 
 
 public function findTweetByHashtag(){

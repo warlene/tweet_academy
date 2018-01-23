@@ -1,5 +1,5 @@
 <?php
-// include'Tweet.php';
+
 ?>
 
 
@@ -7,8 +7,7 @@
   <div class="col-sm-12">
     <div class="panel panel-default text-left">
       <div class="panel-body">
-        <h2>Repondre  à tweet</h2>
-
+        <h2>Repondre à tweet!!!!</h2>
         <form action="" method="post" enctype="multipart/form-data">
           <div>
             <label for="answer_tweet_content">Réponse :</label>
