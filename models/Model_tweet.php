@@ -3,13 +3,13 @@ require_once('models/Model.php');
 
 class Tweet {
 
-  Public function send_tweet_in_bdd($idUser, $tweetContent, $imgUrl, $idReTweet = null, $idReTweetFrom = null){
+  public function send_tweet_in_bdd($idUser, $tweetContent, $imgUrl, $idReTweet = null, $idReTweetFrom = null){
     $bdd = Model::bdd_connect();
     $tweet = $bdd->prepare("INSERT INTO tweet SET idUser = :idUser, tweetContent = :tweetContent, imgUrl = :imgUrl, idReTweet = :idReTweet, idReTweetFrom = :idReTweetFrom, deleted = :deleted");
 
     if($tweet->execute(array(':idUser' => $idUser, ':tweetContent' => $tweetContent, ':imgUrl' => $imgUrl, ':idReTweet' => $idReTweet, ':idReTweetFrom' => $idReTweetFrom, ':deleted' => 'false'))) {
 
-      return $bdd->lastInsertId();
+      return $newTweet = $bdd->lastInsertId();
 
     }
     return $req->errorInfo();
@@ -84,17 +84,17 @@ class Tweet {
 
 
 
-  public function Stock_hashtag($tag){
+  /*public function Stock_hashtag($tag){
     $bdd = Model::bdd_connect();
     $hashtag = $bdd->prepare("INSERT INTO tag VALUES(idTweet,tagName)");
-  }
-  public function Find_hashtag($tweetContent){
+  }*/
+  /*public function Find_hashtag($tweetContent){
     $tweet .=' ';
     preg_match_all('/#[0-9a-z-A-Z]*) /', $tweetContent,$hashtag);
     if (isset($hashtag[1])){
       return $hashtag [1];
     }
     return null;
-  }
+  }*/
 }
 ?>
