@@ -1,14 +1,22 @@
 <?php
 include 'models/Model_tweet.php';
+include 'controllers/FollowController.php';
 
 class TweetController {
 
   public function print_tweet_controller(){
-    // if(!isset($_POST['content_tweet'])){
-
-    // }
     $tweet = new Tweet;
-    $tweet->print_tweet();
+    $print_tweet = $tweet->print_tweet();
+    $print_tweet->execute();
+    $answer_tweet = $this->display_answer_tweet();
+    $follow = new FollowController;
+//fetchALL
+    while ($tweets = $print_tweet->fetch()) {
+      $answer_tweet->execute(array(':idTweet' => $tweets['idTweet']));
+      $answer_count = $this->count_answers_controller($tweets['idTweet']);
+      include 'views/Tweet/Tweet.php';
+      include 'views/Tweet/End_tweet.php';
+    }
   }
 
   public function send_form(){
@@ -32,7 +40,6 @@ class TweetController {
 
           if($resultat || ((isset($tweetContent) && !empty($tweetContent)))) {
             $send_bdd = $form->send_tweet_in_bdd($idUser, $tweetContent, $imgUrl);
-
           } else {
             $msg = "Erreur durant l'importation de votre photo de profil";
           }
@@ -47,13 +54,20 @@ class TweetController {
 
   public function display_answer_tweet(){
     $tweet = new Tweet();
-    $tweet->print_answer_tweet();
+    $comment = $tweet->print_answer_tweet();
+    return $comment;
   }
 
   public function count_tweet_controller(){
     $tweet = new Tweet;
     $idUser = $_SESSION['idUser'];
     $_SESSION['count'] = $tweet->count_tweet($idUser);
+  }
+
+  public function count_answers_controller($idTweet){
+    $answer = new Tweet;
+    $countAnswers = $answer->count_answers($idTweet);
+    $_SESSION['countAnswers'] = $countAnswers;
   }
 
   public function send_answer_tweet($idtweet){
@@ -74,7 +88,6 @@ class TweetController {
           $result = move_uploaded_file($_FILES['imgUrl_answer_tweet']['tmp_name'], $path);
           if ($result || (!empty($answer_tweet_content) || !empty($imgUrl_answer_tweet))){
             $add_answer_tweet = $form->answer_tweet($idUser, $idtweet, $answer_tweet_content, $imgUrl_answer_tweet);
-            header('Location: views/Tweet/display_answer_tweet.php');
           } else {
             $msg = "Erreur durant l'importation de votre photo";
           }
