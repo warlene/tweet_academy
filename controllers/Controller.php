@@ -12,6 +12,8 @@
         $tweet = new TweetController;
         if(isset($_POST['content_tweet'])){
           $tweet->send_form();
+          $tweet->retweet();
+
         }
         $tweet->count_tweet_controller();
 

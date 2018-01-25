@@ -17,9 +17,8 @@ class TweetController {
       include 'views/Tweet/Tweet.php';
       include 'views/Tweet/End_tweet.php';
     }
-
   }
-  
+
   public function send_form(){
     $form = new Tweet;
     $idUser = $_SESSION['idUser'];
@@ -28,19 +27,9 @@ class TweetController {
     $tweetContent = $_POST['content_tweet'];
     if(isset($_FILES['imgUrl']) AND !empty($_FILES['imgUrl']['name']) || ((isset($tweetContent) && !empty($tweetContent)))) {
 
-
-    /*public function Find_hashtag($tweetContent){
-    $tweet .=' ';
-    preg_match_all('/#[0-9a-z-A-Z]*) /', $tweetContent,$hashtag);
-    if (isset($hashtag[1])){
-      return $hashtag [1];
-    }
-    return null;
-  }*/
-
-  $tailleMax = 2097152;
-  $extensionsValides = array('jpg', 'jpeg', 'gif', 'png');
-  if($_FILES['imgUrl']['size'] <= $tailleMax || ((isset($tweetContent) && !empty($tweetContent)))) {
+      $tailleMax = 2097152;
+      $extensionsValides = array('jpg', 'jpeg', 'gif', 'png');
+      if($_FILES['imgUrl']['size'] <= $tailleMax || ((isset($tweetContent) && !empty($tweetContent)))) {
 
         $extensionUpload = strtolower(substr(strrchr($_FILES['imgUrl']['name'], '.'), 1)); // recupere l'extension
 
@@ -51,8 +40,6 @@ class TweetController {
 
           if($resultat || ((isset($tweetContent) && !empty($tweetContent)))) {
             $send_bdd = $form->send_tweet_in_bdd($idUser, $tweetContent, $imgUrl);
-            $hashtag = $this->find_hashtag($tweetContent);
-            var_dump($hashtag);
           } else {
             $msg = "Erreur durant l'importation de votre photo de profil";
           }
@@ -116,34 +103,25 @@ class TweetController {
 
 }
 
- /*public function Find_hashtag($tweetContent){
-   // $tweet .=' ';
-    preg_match_all('/#[0-9a-z-A-Z]*) /', $tweetContent,$hashtag);
-    if (isset($hashtag[1])){
-      var_dump($hashtag);
-      var_dump($hashtag[1]);
-      return $hashtag [1];
-    }
-    return null;
-  }*/
 
-
-/*public function findTweetByHashtag(){
-  $hashtag = new tweet;
-  $tweetContent = $_POST['content_tweet'];
-  $hashtag-> Find_hashtag($tweetContent);
-}
-
-
-public function Stock_hastag_Controller(){
-  $tag = findTweetByHashtag();
-  if ($tag = null) {
-    return false;
-  }
-  else{
-    $hashtag = new tweet;
-    $hashtag->Stock_hashtag($tag);
-  }
-}*/
+//
+//
+// public function findTweetByHashtag(){
+//   $hashtag = new tweet;
+//   $tweetContent = $_POST['content_tweet'];
+//   $hashtag-> Find_hashtag($tweetContent);
+// }
+//
+//
+// public function Stock_hastag_Controller(){
+//   $tag = findTweetByHashtag();
+//   if ($tag = null) {
+//     return false;
+//   }
+//   else{
+//     $hashtag = new tweet;
+//     $hashtag->Stock_hashtag($tag);
+//   }
+// }
 }
 ?>
