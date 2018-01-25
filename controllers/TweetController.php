@@ -12,6 +12,8 @@ class TweetController {
   }
 
   public function send_form(){
+   
+
     $form = new Tweet;
     $idUser = $_SESSION['idUser'];
     $imgUrl = $_FILES['imgUrl']['name'];
@@ -31,7 +33,9 @@ class TweetController {
           $resultat = move_uploaded_file($_FILES['imgUrl']['tmp_name'], $chemin);
 
           if($resultat || ((isset($tweetContent) && !empty($tweetContent)))) {
+           
             $send_bdd = $form->send_tweet_in_bdd($idUser, $tweetContent, $imgUrl);
+
 
           } else {
             $msg = "Erreur durant l'importation de votre photo de profil";
@@ -45,10 +49,39 @@ class TweetController {
     }
   }
 
+
+
+  public function retweet (){
+    $retweet = new Tweet(); 
+   
+    $idUser = $_SESSION['idUser'];
+
+    $result = $retweet->get_tweetContent();
+    $tweetContent = $result['tweetContent'];
+    $imgUrl = $result['imgUrl'];
+    $idReTweet = $_GET['id'];
+    $idReTweetFrom = $result['idUser'];
+    $retweet->get_tweetContent(); 
+    if(isset($_POST['retweet_form'])){
+    $tweetContent .= $_POST['text_retweet'];
+    $retweet->retweet($idUser, $tweetContent, $imgUrl, $idReTweet, $idReTweetFrom);
+   /* header('Location: views/Tweet/tweet.php');
+*/
+    
+    }
+    
+    include'views/Tweet/retweet.php';
+
+    
+  }
+
+
   public function display_answer_tweet(){
     $tweet = new Tweet();
     $tweet->print_answer_tweet();
   }
+
+
 
   public function count_tweet_controller(){
     $tweet = new Tweet;
@@ -89,6 +122,7 @@ class TweetController {
   }
 
 }
+
 
 
 

@@ -25,6 +25,8 @@
           <a href="rooter.php?controller=account&action=message">Messages</a></li>
       </ul>
     </div>
+
+      <!--  FORM SEARCH TAG  -->
       <form class="navbar-form navbar-right" role="search">
         <div class="form-group input-group">
           <input type="text" class="form-control" placeholder="Recherche de #">
@@ -35,6 +37,8 @@
           </span>
         </div>
       </form>
+
+
       <ul class="nav navbar-nav navbar-right">
         <li class="nav-item dropdown <?php if(isset($_GET['action']) && $_GET['action']=='profil'){ ?>active<?php } ?>">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

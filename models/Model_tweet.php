@@ -3,17 +3,21 @@ require_once('models/Model.php');
 
 class Tweet {
 
-  Public function send_tweet_in_bdd($idUser, $tweetContent, $imgUrl, $idReTweet = null, $idReTweetFrom = null){
+  public function send_tweet_in_bdd($idUser, $tweetContent, $imgUrl, $idReTweet = null, $idReTweetFrom = null){
     $bdd = Model::bdd_connect();
     $tweet = $bdd->prepare("INSERT INTO tweet SET idUser = :idUser, tweetContent = :tweetContent, imgUrl = :imgUrl, idReTweet = :idReTweet, idReTweetFrom = :idReTweetFrom, deleted = :deleted");
+    
 
     if($tweet->execute(array(':idUser' => $idUser, ':tweetContent' => $tweetContent, ':imgUrl' => $imgUrl, ':idReTweet' => $idReTweet, ':idReTweetFrom' => $idReTweetFrom, ':deleted' => 'false'))) {
+      include('views/Tweet/retweet.php');
+      
 
       return $bdd->lastInsertId();
-
     }
+
     return $req->errorInfo();
   }
+
 
   public function print_tweet(){
     $bdd = Model::bdd_connect();
@@ -37,15 +41,46 @@ class Tweet {
     }
   }
 
+  public function get_tweetContent(){
+    $bdd = Model::bdd_connect();
+    $sql = $bdd->prepare("SELECT *FROM tweet WHERE idtweet = ?");
+    $sql->execute([$_GET['id']]);
+    return $result= $sql->fetch();
+  }
+
+
+
+  public function retweet($idUser, $tweetContent, $imgUrl, $idReTweet, $idReTweetFrom){
+    $bdd = Model::bdd_connect();
+    $this->get_tweetContent();
+    $query = $bdd->prepare("INSERT INTO tweet (idUser, tweetContent, imgUrl, idReTweet, idReTweetFrom) VALUES(?, ?, ?, ?, ?)");
+    $query->execute([$idUser, $tweetContent, $imgUrl, $idReTweet, $idReTweetFrom]);
+
+
+    //var_dump($_GET['id']);
+    /*$bdd = Model::bdd_connect();
+    $sql = $bdd->prepare("SELECT * FROM tweet WHERE idTweet = ? ");
+    $sql->execute([$_GET['id']]);
+    $result = $sql->fetch();
+   
+    $query = $bdd->prepare("INSERT INTO tweet (idUser, tweetContent, imgUrl, idReTweet, idReTweetFrom) VALUES(?, ?, ?, ?, ?)");
+    $a = $query->execute([$idUser, $tweetContent, $imgUrl, $idReTweet, $idReTweetFrom]);
+
+
+    return $result;*/
+
+  }
+
+
 
   public function print_answer_tweet(){
-  /*SELECT comment.idUser,fullName, displayName, commentContent, imgUrl, commentCreationDate FROM comment INNER JOIN user ON user.idUser = comment.idUser WHERE idTweet = 28 ORDER BY commentContent DESC */
+    /*SELECT comment.idUser,fullName, displayName, commentContent, imgUrl, commentCreationDate FROM comment INNER JOIN user ON user.idUser = comment.idUser WHERE idTweet = 28 ORDER BY commentContent DESC */
     $bdd = Model::bdd_connect();
     $answer_tweet = $bdd->prepare("SELECT comment.idUser,fullName, displayName, commentContent, imgUrl, commentCreationDate 
-                          FROM comment 
-                          INNER JOIN user ON user.idUser = comment.idUser 
-                          WHERE idTweet = ? 
-                          ORDER BY commentContent DESC ");
+      FROM comment 
+      INNER JOIN user ON user.idUser = comment.idUser 
+      WHERE idTweet = ? 
+      ORDER BY commentContent DESC ");
     $answer_tweet->execute([$_GET['idtweet']]);
     while($all_answer_tweet = $answer_tweet->fetch()){
       include('views/Tweet/display_answer_tweet.php');
@@ -69,14 +104,14 @@ class Tweet {
       idTweet = :idTweet,
       commentContent = :commentContent,
       imgUrl = :imgUrl");
-      /*:imgUrl_answer_tweet = :imgUrl");*/
+    /*:imgUrl_answer_tweet = :imgUrl");*/
     $answer_tweet =  $sql->execute(array(
       ':idUser' => $idUser,
       ':idTweet' => $idtweet,
       ':commentContent' => $answer_tweet_content,
       ':imgUrl' => $imgUrl_answer_tweet
-      ));
-    var_dump($answer_tweet);
+    ));
+
     return $answer_tweet;
   }
 
@@ -84,7 +119,7 @@ class Tweet {
 
 
 
-  public function Stock_hashtag($tag){
+  /*public function Stock_hashtag($tag){
     $bdd = Model::bdd_connect();
     $hashtag = $bdd->prepare("INSERT INTO tag VALUES(idTweet,tagName)");
   }
@@ -95,6 +130,6 @@ class Tweet {
       return $hashtag [1];
     }
     return null;
-  }
+  }*/
 }
 ?>
