@@ -6,11 +6,11 @@ class Tweet {
   public function send_tweet_in_bdd($idUser, $tweetContent, $imgUrl, $idReTweet = null, $idReTweetFrom = null){
     $bdd = Model::bdd_connect();
     $tweet = $bdd->prepare("INSERT INTO tweet SET idUser = :idUser, tweetContent = :tweetContent, imgUrl = :imgUrl, idReTweet = :idReTweet, idReTweetFrom = :idReTweetFrom, deleted = :deleted");
-    
+
 
     if($tweet->execute(array(':idUser' => $idUser, ':tweetContent' => $tweetContent, ':imgUrl' => $imgUrl, ':idReTweet' => $idReTweet, ':idReTweetFrom' => $idReTweetFrom, ':deleted' => 'false'))) {
       /*include('views/Tweet/retweet.php');*/
-      
+
       return $newTweet = $bdd->lastInsertId();
     }
 
@@ -56,7 +56,7 @@ class Tweet {
     $sql = $bdd->prepare("SELECT * FROM tweet WHERE idTweet = ? ");
     $sql->execute([$_GET['id']]);
     $result = $sql->fetch();
-   
+
     $query = $bdd->prepare("INSERT INTO tweet (idUser, tweetContent, imgUrl, idReTweet, idReTweetFrom) VALUES(?, ?, ?, ?, ?)");
     $a = $query->execute([$idUser, $tweetContent, $imgUrl, $idReTweet, $idReTweetFrom]);
 
@@ -68,18 +68,13 @@ class Tweet {
 
 
   public function print_answer_tweet(){
-    /*SELECT comment.idUser,fullName, displayName, commentContent, imgUrl, commentCreationDate FROM comment INNER JOIN user ON user.idUser = comment.idUser WHERE idTweet = 28 ORDER BY commentContent DESC */
     $bdd = Model::bdd_connect();
-    $answer_tweet = $bdd->prepare("SELECT comment.idUser,fullName, displayName, commentContent, imgUrl, commentCreationDate 
-      FROM comment 
-      INNER JOIN user ON user.idUser = comment.idUser 
-      WHERE idTweet = ? 
+    $answer_tweet = $bdd->prepare("SELECT comment.idUser,fullName, displayName, commentContent, imgUrl, commentCreationDate
+      FROM comment
+      INNER JOIN user ON user.idUser = comment.idUser
+      WHERE idTweet = :idTweet
       ORDER BY commentContent DESC ");
-    $answer_tweet->execute([$_GET['idtweet']]);
-    while($all_answer_tweet = $answer_tweet->fetch()){
-      include('views/Tweet/display_answer_tweet.php');
-    }
-
+    return $answer_tweet;
   }
 
   public function count_tweet($idUser){
