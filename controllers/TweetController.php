@@ -1,16 +1,25 @@
 <?php
 include 'models/Model_tweet.php';
+include 'controllers/FollowController.php';
 
 class TweetController {
 
   public function print_tweet_controller(){
-    // if(!isset($_POST['content_tweet'])){
-
-    // }
     $tweet = new Tweet;
-    $tweet->print_tweet();
-  }
+    $print_tweet = $tweet->print_tweet();
+    $print_tweet->execute();
+    $answer_tweet = $this->display_answer_tweet();
+    $follow = new FollowController;
+//fetchALL
+    while ($tweets = $print_tweet->fetch()) {
+      $answer_tweet->execute(array(':idTweet' => $tweets['idTweet']));
+      $answer_count = $this->count_answers_controller($tweets['idTweet']);
+      include 'views/Tweet/Tweet.php';
+      include 'views/Tweet/End_tweet.php';
+    }
 
+  }
+  
   public function send_form(){
    
 
@@ -21,9 +30,19 @@ class TweetController {
     $tweetContent = $_POST['content_tweet'];
     if(isset($_FILES['imgUrl']) AND !empty($_FILES['imgUrl']['name']) || ((isset($tweetContent) && !empty($tweetContent)))) {
 
-      $tailleMax = 2097152;
-      $extensionsValides = array('jpg', 'jpeg', 'gif', 'png');
-      if($_FILES['imgUrl']['size'] <= $tailleMax || ((isset($tweetContent) && !empty($tweetContent)))) {
+
+    /*public function Find_hashtag($tweetContent){
+    $tweet .=' ';
+    preg_match_all('/#[0-9a-z-A-Z]*) /', $tweetContent,$hashtag);
+    if (isset($hashtag[1])){
+      return $hashtag [1];
+    }
+    return null;
+  }*/
+
+  $tailleMax = 2097152;
+  $extensionsValides = array('jpg', 'jpeg', 'gif', 'png');
+  if($_FILES['imgUrl']['size'] <= $tailleMax || ((isset($tweetContent) && !empty($tweetContent)))) {
 
         $extensionUpload = strtolower(substr(strrchr($_FILES['imgUrl']['name'], '.'), 1)); // recupere l'extension
 
@@ -37,6 +56,9 @@ class TweetController {
             $send_bdd = $form->send_tweet_in_bdd($idUser, $tweetContent, $imgUrl);
 
 
+
+            $hashtag = $this->find_hashtag($tweetContent);
+            var_dump($hashtag);
           } else {
             $msg = "Erreur durant l'importation de votre photo de profil";
           }
@@ -78,7 +100,8 @@ class TweetController {
 
   public function display_answer_tweet(){
     $tweet = new Tweet();
-    $tweet->print_answer_tweet();
+    $comment = $tweet->print_answer_tweet();
+    return $comment;
   }
 
 
@@ -87,6 +110,12 @@ class TweetController {
     $tweet = new Tweet;
     $idUser = $_SESSION['idUser'];
     $_SESSION['count'] = $tweet->count_tweet($idUser);
+  }
+
+  public function count_answers_controller($idTweet){
+    $answer = new Tweet;
+    $countAnswers = $answer->count_answers($idTweet);
+    $_SESSION['countAnswers'] = $countAnswers;
   }
 
   public function send_answer_tweet($idtweet){
@@ -107,7 +136,6 @@ class TweetController {
           $result = move_uploaded_file($_FILES['imgUrl_answer_tweet']['tmp_name'], $path);
           if ($result || (!empty($answer_tweet_content) || !empty($imgUrl_answer_tweet))){
             $add_answer_tweet = $form->answer_tweet($idUser, $idtweet, $answer_tweet_content, $imgUrl_answer_tweet);
-            header('Location: views/Tweet/display_answer_tweet.php');
           } else {
             $msg = "Erreur durant l'importation de votre photo";
           }
@@ -123,26 +151,21 @@ class TweetController {
 
 }
 
+ /*public function Find_hashtag($tweetContent){
+   // $tweet .=' ';
+    preg_match_all('/#[0-9a-z-A-Z]*) /', $tweetContent,$hashtag);
+    if (isset($hashtag[1])){
+      var_dump($hashtag);
+      var_dump($hashtag[1]);
+      return $hashtag [1];
+    }
+    return null;
+  }*/
 
 
 
 
-public function findTweetByHashtag(){
-  $hashtag = new tweet;
-  $tweetContent = $_POST['content_tweet'];
-  $hashtag-> Find_hashtag($tweetContent);
-}
 
 
-public function Stock_hastag_Controller(){
-  $tag = findTweetByHashtag();
-  if ($tag = null) {
-    return false;
-  }
-  else{
-    $hashtag = new tweet;
-    $hashtag->Stock_hashtag($tag);
-  }
-}
 }
 ?>

@@ -9,10 +9,9 @@ class Tweet {
     
 
     if($tweet->execute(array(':idUser' => $idUser, ':tweetContent' => $tweetContent, ':imgUrl' => $imgUrl, ':idReTweet' => $idReTweet, ':idReTweetFrom' => $idReTweetFrom, ':deleted' => 'false'))) {
-      include('views/Tweet/retweet.php');
+      /*include('views/Tweet/retweet.php');*/
       
-
-      return $bdd->lastInsertId();
+      return $newTweet = $bdd->lastInsertId();
     }
 
     return $req->errorInfo();
@@ -22,12 +21,7 @@ class Tweet {
   public function print_tweet(){
     $bdd = Model::bdd_connect();
     $tweet = $bdd->prepare("SELECT displayName, fullName, user.idUser,idUrlAvatar, tweetDate, TweetContent, imgUrl, idTweet FROM tweet INNER JOIN user ON tweet.idUser = user.idUser ORDER BY tweetDate DESC ");
-
-    $tweet->execute();
-
-    while ($tweets  = $tweet->fetch()) {
-      include 'views/Tweet/Tweet.php';
-    }
+    return $tweet;
   }
 
   public function print_tweet_user(){
@@ -36,7 +30,7 @@ class Tweet {
 
     $tweet->execute();
 
-    while ($tweets  = $tweet->fetch()) {
+    while ($tweets = $tweet->fetch()) {
       include 'views/Tweet/Tweet.php';
     }
   }
@@ -85,6 +79,7 @@ class Tweet {
     while($all_answer_tweet = $answer_tweet->fetch()){
       include('views/Tweet/display_answer_tweet.php');
     }
+
   }
 
   public function count_tweet($idUser){
@@ -96,6 +91,14 @@ class Tweet {
     return $count[0];
   }
 
+  public function count_answers($idTweet){
+    $bdd = Model::bdd_connect();
+    $answer = $bdd->prepare("SELECT count(idComment) FROM comment INNER JOIN tweet ON comment.idTweet = tweet.idTweet WHERE tweet.idTweet = ? ");
+
+    $answer->execute(array($idTweet));
+    $count = $answer->fetch();
+    return $count[0];
+  }
 
   public function answer_tweet($idUser, $idtweet, $answer_tweet_content, $imgUrl_answer_tweet){
     $bdd = Model::bdd_connect();
@@ -110,8 +113,8 @@ class Tweet {
       ':idTweet' => $idtweet,
       ':commentContent' => $answer_tweet_content,
       ':imgUrl' => $imgUrl_answer_tweet
-    ));
 
+      ));
     return $answer_tweet;
   }
 
@@ -122,8 +125,8 @@ class Tweet {
   /*public function Stock_hashtag($tag){
     $bdd = Model::bdd_connect();
     $hashtag = $bdd->prepare("INSERT INTO tag VALUES(idTweet,tagName)");
-  }
-  public function Find_hashtag($tweetContent){
+  }*/
+  /*public function Find_hashtag($tweetContent){
     $tweet .=' ';
     preg_match_all('/#[0-9a-z-A-Z]*) /', $tweetContent,$hashtag);
     if (isset($hashtag[1])){

@@ -24,11 +24,11 @@
 
         include 'views/layout/News_homepage.php';
         include 'views/Tweet/Form_tweet.php';
+        $tweet->print_tweet_controller();
         if(isset($_POST['answer_tweet_content'])){
           $tweet->send_answer_tweet($_POST['idTweet']);
         }
-        $tweet->print_tweet_controller();
-
+        // $tweet->display_answer_tweet($tweets['idTweet']);
         include 'views/layout/End_page.php';
       }
     }

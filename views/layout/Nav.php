@@ -8,6 +8,8 @@
   <link rel="stylesheet" type="text/css" href="style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="js/tweet_academie.js"></script>
+  <!-- <meta http-equiv="refresh" content="5"> -->
   <!-- <script src="js/tweet_academie.js" type="text/javascript"></script> -->
 </head>
 <body>
@@ -25,13 +27,13 @@
           <a href="rooter.php?controller=account&action=message">Messages</a></li>
       </ul>
     </div>
-
-      <!--  FORM SEARCH TAG  -->
+    
       <form class="navbar-form navbar-right" role="search">
+
         <div class="form-group input-group">
-          <input type="text" class="form-control" placeholder="Recherche de #">
+          <input  type="text" name="search_tag" class="form-control" placeholder="Recherche de #">
           <span class="input-group-btn">
-            <button class="btn btn-default" type="button">
+            <button name="confirm_tag" class="btn btn-default" type="submit">
               <span class="glyphicon glyphicon-search"></span>
             </button>
           </span>
