@@ -20,10 +20,7 @@
                   <h4><span class="fullname"><strong><?= $tweets['fullName'] . " " ;?></strong></span><?= $tweets['displayName']  . " . " . $date_ok ?></h4>
                 </div>
                 <div class="follow">
-                  <!-- <form class="form_follow" method="POST" action="">
-                    <input type="hidden" name="idUserFollowed" value="<?= $tweets['idUser'];?>"> -->
                     <?php include 'views/Tweet/Follow_button.php'; ?>
-                  <!-- </form> -->
                 </div>
               </div>
               </div>
