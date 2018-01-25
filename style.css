@@ -33,9 +33,36 @@ input, textarea {
 #imgUrl, .collapse .picture {
   display: none;
 }
+a li {
+  font-family: 'arial';
+  font-size: 0.8em;
+  list-style: none;
+  padding-top: 5px;
+  text-decoration: none;
+}
+a li:hover, .panel .glyphicon:hover {
+  color: #FAAC58;
+}
+p {
+  margin-top: 10px;
+}
+.line {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+.follow {
+  padding-left: 40px;
+}
+.following {
+  color: #FAAC58;
+}
 .btn-form{
   background-color: #81BEF7;
   color: #fff;
+}
+.btn-form:hover {
+  background-color: #FAAC58;
 }
 .panel .glyphicon {
   color: #81BEF7;

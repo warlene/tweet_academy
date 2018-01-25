@@ -18,12 +18,7 @@ class Tweet {
   public function print_tweet(){
     $bdd = Model::bdd_connect();
     $tweet = $bdd->prepare("SELECT displayName, fullName, user.idUser,idUrlAvatar, tweetDate, TweetContent, imgUrl, idTweet FROM tweet INNER JOIN user ON tweet.idUser = user.idUser ORDER BY tweetDate DESC ");
-
-    $tweet->execute();
-
-    while ($tweets  = $tweet->fetch()) {
-      include 'views/Tweet/Tweet.php';
-    }
+    return $tweet;
   }
 
   public function print_tweet_user(){
@@ -32,24 +27,20 @@ class Tweet {
 
     $tweet->execute();
 
-    while ($tweets  = $tweet->fetch()) {
+    while ($tweets = $tweet->fetch()) {
       include 'views/Tweet/Tweet.php';
     }
   }
 
 
   public function print_answer_tweet(){
-  /*SELECT comment.idUser,fullName, displayName, commentContent, imgUrl, commentCreationDate FROM comment INNER JOIN user ON user.idUser = comment.idUser WHERE idTweet = 28 ORDER BY commentContent DESC */
     $bdd = Model::bdd_connect();
-    $answer_tweet = $bdd->prepare("SELECT comment.idUser,fullName, displayName, commentContent, imgUrl, commentCreationDate 
-                          FROM comment 
-                          INNER JOIN user ON user.idUser = comment.idUser 
-                          WHERE idTweet = ? 
-                          ORDER BY commentContent DESC ");
-    $answer_tweet->execute([$_GET['idtweet']]);
-    while($all_answer_tweet = $answer_tweet->fetch()){
-      include('views/Tweet/display_answer_tweet.php');
-    }
+    $answer_tweet = $bdd->prepare("SELECT comment.idUser,fullName, displayName, commentContent, imgUrl, commentCreationDate
+                          FROM comment
+                          INNER JOIN user ON user.idUser = comment.idUser
+                          WHERE idTweet = :idTweet
+                          ORDER BY commentCreationDate DESC ");
+    return $answer_tweet;
   }
 
   public function count_tweet($idUser){
@@ -61,6 +52,14 @@ class Tweet {
     return $count[0];
   }
 
+  public function count_answers($idTweet){
+    $bdd = Model::bdd_connect();
+    $answer = $bdd->prepare("SELECT count(idComment) FROM comment INNER JOIN tweet ON comment.idTweet = tweet.idTweet WHERE tweet.idTweet = ? ");
+
+    $answer->execute(array($idTweet));
+    $count = $answer->fetch();
+    return $count[0];
+  }
 
   public function answer_tweet($idUser, $idtweet, $answer_tweet_content, $imgUrl_answer_tweet){
     $bdd = Model::bdd_connect();
@@ -76,7 +75,6 @@ class Tweet {
       ':commentContent' => $answer_tweet_content,
       ':imgUrl' => $imgUrl_answer_tweet
       ));
-    var_dump($answer_tweet);
     return $answer_tweet;
   }
 

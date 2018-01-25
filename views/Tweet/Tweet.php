@@ -4,8 +4,8 @@
   $date_ok = $date->change_date( $tweets['tweetDate']);
 ?>
 
-<div class="row">
-  <div class="col-lg-12 col-sm-6">
+<div class="row" id="myTweet">
+  <div class="col-lg-12">
     <div class="panel panel-default text-left">
       <div class="panel-body">
         <div class="display_tweet">
@@ -15,8 +15,18 @@
             }
             ?>
             <div class="head-tweet">
-              <h4><span class="fullname"><strong><?= $tweets['fullName'] . " " ;?></strong></span><?= $tweets['displayName']  . " . " . $date_ok ?></h4>
-            </div>
+              <div class="line">
+                <div class="name">
+                  <h4><span class="fullname"><strong><?= $tweets['fullName'] . " " ;?></strong></span><?= $tweets['displayName']  . " . " . $date_ok ?></h4>
+                </div>
+                <div class="follow">
+                  <!-- <form class="form_follow" method="POST" action="">
+                    <input type="hidden" name="idUserFollowed" value="<?= $tweets['idUser'];?>"> -->
+                    <?php include 'views/Tweet/Follow_button.php'; ?>
+                  <!-- </form> -->
+                </div>
+              </div>
+              </div>
             <p><?= $tweets['TweetContent'] ?></p>
             <?php
             if($tweets['imgUrl'] != null) {
@@ -24,14 +34,9 @@
                 <?php
             }
             ?><br/>
-            <a href="#<?=$tweets['idTweet'];?>" class="glyphicon glyphicon-pencil" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="<?=$tweets['idTweet'];?>" title="Répondre"></a>
+            <a href="#<?=$tweets['idTweet'];?>" class="glyphicon glyphicon-pencil" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="<?=$tweets['idTweet'];?>" title="Répondre"><li><?php if($_SESSION['countAnswers'] >0){ echo $_SESSION['countAnswers']; };?></li></a>
             <a href="#" class="glyphicon glyphicon-refresh" data-toggle="tooltip" title="Retweeter"></a>
             <a href="#" class="glyphicon glyphicon-heart-empty" data-toggle="tooltip" title="J'aime"></a><br/><br/>
-            <div class="collapse" id="<?=$tweets['idTweet'];?>">
+            <div class="collapse multi-collapse" id="<?=$tweets['idTweet'];?>">
               <?php include 'views/Tweet/FormAnswerTweet.php'; ?>
             </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
